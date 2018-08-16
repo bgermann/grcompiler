@@ -1,27 +1,35 @@
 noinst_LIBRARIES = libparser.a
 
 libparser_a_SOURCES = \
-	AST.cpp \
-	ASTDebug.hpp \
-	ANTLRException.cpp \
+	ANTLRUtil.cpp \
 	ASTFactory.cpp \
+	ASTNULLType.cpp \
+	ASTRefCount.cpp \
+	BaseAST.cpp \
 	BitSet.cpp \
 	CharBuffer.cpp \
 	CharScanner.cpp \
-	CommonASTNode.cpp \
+	CommonAST.cpp \
+	CommonASTWithHiddenTokens.cpp \
+	CommonHiddenStreamToken.cpp \
 	CommonToken.cpp \
 	InputBuffer.cpp \
-	LexerSharedInputState.cpp \
 	LLkParser.cpp \
+	MismatchedCharException.cpp \
 	MismatchedTokenException.cpp \
 	NoViableAltException.cpp \
+	NoViableAltForCharException.cpp \
 	Parser.cpp \
-	ParserException.cpp \
-	ParserSharedInputState.cpp \
-	ScannerException.cpp \
+	RecognitionException.cpp \
 	String.cpp \
 	Token.cpp \
-	TokenBuffer.cpp
+	TokenBuffer.cpp \
+	TokenStreamBasicFilter.cpp \
+	TokenStreamHiddenTokenFilter.cpp \
+	TokenStreamSelector.cpp \
+	TokenStreamRewriteEngine.cpp \
+	TreeParser.cpp \
+	TokenRefCount.cpp
 
 EXTRA_DIST = @srcdir@/antlr/*.hpp
 
