@@ -30,12 +30,12 @@ using namespace gr;
 
 #include "UtilString.h"
 
-#include "Antlr/AST.hpp"
-#include "Antlr/CommonToken.hpp"
-#include "Antlr/CommonASTNode.hpp"
-#include "Antlr/TokenStream.hpp"
-#include "Antlr/ScannerException.hpp"
-#include "Antlr/ParserException.hpp"
+#include "antlr/AST.hpp"
+#include "antlr/CommonToken.hpp"
+#include "antlr/CommonASTNode.hpp"
+#include "antlr/TokenStream.hpp"
+#include "antlr/ScannerException.hpp"
+#include "antlr/ParserException.hpp"
 
 #include "GrpLineAndFile.hpp"
 #include "GrpParserTokenTypes.hpp"

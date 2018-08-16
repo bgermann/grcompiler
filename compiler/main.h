@@ -111,7 +111,7 @@ extern GrcManager g_cman;
 
 ///#include "Grp.h"
 #include "GrpLineAndFile.hpp"
-#include "Antlr/AST.hpp"
+#include "antlr/AST.hpp"
 
 #include "constants.h"
 #include "GdlObject.h"

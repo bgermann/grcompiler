@@ -7,7 +7,7 @@ NULL=nul
 TARGET=GrCompiler
 GRC_SRC=.\compiler
 GRC_GRMR_SRC=.\compiler\Grammar
-GRC_ANTLR_SRC=.\compiler\Grammar\Antlr
+GRC_ANTLR_SRC=.\compiler\Grammar\antlr
 GRC_LZ4_SRC=.\compiler\LZ4
 GRC_RES=.\compiler
 GRC_GEN_SRC=.\compiler\Generic
@@ -34,7 +34,7 @@ clean :
 realclean : clean
     @- rd /s/q $(OUTDIR)
 
-CPP_PROJ=/Zc:wchar_t- /nologo /MT /W3 /GR /EHsc /O2 /I "./compiler" /I "./compiler/grammar" /I "./compiler/Grammar/Antlr" /I "./compiler/generic" /I "./icu/source/common" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /c 
+CPP_PROJ=/Zc:wchar_t- /nologo /MT /W3 /GR /EHsc /O2 /I "./compiler" /I "./compiler/grammar" /I "./compiler/Grammar/antlr" /I "./compiler/generic" /I "./icu/source/common" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /c 
 RSC_PROJ=/l 0x409 /fo"$(INTDIR)\$(TARGET).res" /d "NDEBUG"
 LINK32_FLAGS=kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib icuuc.lib /nologo /subsystem:console /incremental:no /machine:I386 /out:"$(OUTDIR)\$(TARGET).exe" /LIBPATH:".\icu\lib\"
 BSC32_FLAGS=/nologo /o"$(OUTDIR)\$(TARGET).bsc" 
@@ -54,7 +54,7 @@ clean :
 realclean : clean
     @- rd /s/q $(OUTDIR)
 
-CPP_PROJ=/nologo /MTd /W3 /Gm /GR /EHsc /RTC1 /ZI /Od /I "./compiler" /I "./compiler/grammar" /I "./compiler/Grammar/Antlr" /I "./compiler/generic" /I "./icu/source/common" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /FR"$(INTDIR)\\" /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /c 
+CPP_PROJ=/nologo /MTd /W3 /Gm /GR /EHsc /RTC1 /ZI /Od /I "./compiler" /I "./compiler/grammar" /I "./compiler/Grammar/antlr" /I "./compiler/generic" /I "./icu/source/common" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /FR"$(INTDIR)\\" /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /c 
 RSC_PROJ=/l 0x409 /fo"$(INTDIR)\$(TARGET).res" /d "_DEBUG"
 LINK32_FLAGS=kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib icuucd.lib /nologo /subsystem:console /incremental:yes /pdb:"$(OUTDIR)\$(TARGET).pdb" /debug /machine:I386 /out:"$(OUTDIR)\$(TARGET).exe" /pdbtype:sept /LIBPATH:".\icu\lib\"
 BSC32_FLAGS=/nologo /o"$(OUTDIR)\$(TARGET).bsc" 

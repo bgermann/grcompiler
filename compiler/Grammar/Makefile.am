@@ -23,5 +23,5 @@ libparser_a_SOURCES = \
 	Token.cpp \
 	TokenBuffer.cpp
 
-EXTRA_DIST = @srcdir@/Antlr/*.hpp
+EXTRA_DIST = @srcdir@/antlr/*.hpp
 
