@@ -1,16 +1,14 @@
-/*
- * ANTLR-generated file resulting from grammar c:\graphite1\grcompiler\compiler\grpparser.g
- * 
- * Terence Parr, MageLang Institute
- * with John Lilley, Empathy Software
- * ANTLR Version 2.6.0; 1996-1999
- */
-
+/* $ANTLR 2.7.7 (20170711): "GrpParser.g" -> "GrpLexer.cpp"$ */
 #include "GrpLexer.hpp"
-#include "GrpParserTokenTypes.hpp"
-#include "Antlr/ScannerException.hpp"
-#include "Antlr/CharBuffer.hpp"
+#include <antlr/CharBuffer.hpp>
+#include <antlr/TokenStreamException.hpp>
+#include <antlr/TokenStreamIOException.hpp>
+#include <antlr/TokenStreamRecognitionException.hpp>
+#include <antlr/CharStreamException.hpp>
+#include <antlr/CharStreamIOException.hpp>
+#include <antlr/NoViableAltForCharException.hpp>
 
+#line 831 "GrpParser.g"
 
 
 //	Insert at the beginning of the GrpLexer.cpp file:
@@ -33,24 +31,22 @@ void GrpLexer::reportError(const ScannerException& ex)
 }
 
 
-GrpLexer::GrpLexer(std::istream& in)
-	: CharScanner(new CharBuffer(in))
+#line 35 "GrpLexer.cpp"
+GrpLexer::GrpLexer(ANTLR_USE_NAMESPACE(std)istream& in)
+	: ANTLR_USE_NAMESPACE(antlr)CharScanner(new ANTLR_USE_NAMESPACE(antlr)CharBuffer(in),true)
 {
-	setCaseSensitive(true);
 	initLiterals();
 }
 
-GrpLexer::GrpLexer(InputBuffer& ib)
-	: CharScanner(ib)
+GrpLexer::GrpLexer(ANTLR_USE_NAMESPACE(antlr)InputBuffer& ib)
+	: ANTLR_USE_NAMESPACE(antlr)CharScanner(ib,true)
 {
-	setCaseSensitive(true);
 	initLiterals();
 }
 
-GrpLexer::GrpLexer(const LexerSharedInputState& state)
-	: CharScanner(state)
+GrpLexer::GrpLexer(const ANTLR_USE_NAMESPACE(antlr)LexerSharedInputState& state)
+	: ANTLR_USE_NAMESPACE(antlr)CharScanner(state,true)
 {
-	setCaseSensitive(true);
 	initLiterals();
 }
 
@@ -88,357 +84,369 @@ void GrpLexer::initLiterals()
 	literals["endpass"] = 39;
 	literals["language"] = 35;
 }
-bool GrpLexer::getCaseSensitiveLiterals() const
-{
-	return false;
-}
 
-RefToken GrpLexer::nextToken()
+ANTLR_USE_NAMESPACE(antlr)RefToken GrpLexer::nextToken()
 {
-	RefToken _rettoken;
+	ANTLR_USE_NAMESPACE(antlr)RefToken theRetToken;
 	for (;;) {
-		RefToken _rettoken;
-		int _ttype = Token::INVALID_TYPE;
+		ANTLR_USE_NAMESPACE(antlr)RefToken theRetToken;
+		int _ttype = ANTLR_USE_NAMESPACE(antlr)Token::INVALID_TYPE;
 		resetText();
-		try {   // for error handling
+		try {   // for lexical and char stream error handling
 			switch ( LA(1)) {
-			case static_cast<unsigned char>('\t'):
-			case static_cast<unsigned char>('\n'):
-			case static_cast<unsigned char>('\14'):
-			case static_cast<unsigned char>('\r'):
-			case static_cast<unsigned char>(' '):
+			case 0x9 /* '\t' */ :
+			case 0xa /* '\n' */ :
+			case 0xc /* '\14' */ :
+			case 0xd /* '\r' */ :
+			case 0x20 /* ' ' */ :
 			{
 				mWS(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>('0'):
-			case static_cast<unsigned char>('1'):
-			case static_cast<unsigned char>('2'):
-			case static_cast<unsigned char>('3'):
-			case static_cast<unsigned char>('4'):
-			case static_cast<unsigned char>('5'):
-			case static_cast<unsigned char>('6'):
-			case static_cast<unsigned char>('7'):
-			case static_cast<unsigned char>('8'):
-			case static_cast<unsigned char>('9'):
+			case 0x30 /* '0' */ :
+			case 0x31 /* '1' */ :
+			case 0x32 /* '2' */ :
+			case 0x33 /* '3' */ :
+			case 0x34 /* '4' */ :
+			case 0x35 /* '5' */ :
+			case 0x36 /* '6' */ :
+			case 0x37 /* '7' */ :
+			case 0x38 /* '8' */ :
+			case 0x39 /* '9' */ :
 			{
 				mLIT_INT(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>('\''):
-			case static_cast<unsigned char>('\221'):
-			case static_cast<unsigned char>('\222'):
+			case 0x27 /* '\'' */ :
+			case 0x91:
+			case 0x92:
 			{
 				mLIT_CHAR(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>('"'):
-			case static_cast<unsigned char>('\223'):
-			case static_cast<unsigned char>('\224'):
+			case 0x22 /* '\"' */ :
+			case 0x93:
+			case 0x94:
 			{
 				mLIT_STRING(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>(':'):
+			case 0x3a /* ':' */ :
 			{
 				mOP_COLON(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>(';'):
+			case 0x3b /* ';' */ :
 			{
 				mOP_SEMI(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>('['):
+			case 0x5b /* '[' */ :
 			{
 				mOP_LBRACKET(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>(']'):
+			case 0x5d /* ']' */ :
 			{
 				mOP_RBRACKET(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>('('):
+			case 0x28 /* '(' */ :
 			{
 				mOP_LPAREN(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>(')'):
+			case 0x29 /* ')' */ :
 			{
 				mOP_RPAREN(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>('{'):
+			case 0x7b /* '{' */ :
 			{
 				mOP_LBRACE(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>('}'):
+			case 0x7d /* '}' */ :
 			{
 				mOP_RBRACE(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>(','):
+			case 0x2c /* ',' */ :
 			{
 				mOP_COMMA(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>('$'):
+			case 0x24 /* '$' */ :
 			{
 				mOP_DOLLAR(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>('~'):
+			case 0x7e /* '~' */ :
 			{
 				mOP_BITNOT(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>('\\'):
+			case 0x5c /* '\\' */ :
 			{
 				mOP_BSLASH(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>('_'):
+			case 0x5f /* '_' */ :
 			{
 				mOP_UNDER(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>('?'):
+			case 0x3f /* '?' */ :
 			{
 				mOP_QUESTION(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>('^'):
+			case 0x5e /* '^' */ :
 			{
 				mOP_CARET(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
-			case static_cast<unsigned char>('@'):
+			case 0x40 /* '@' */ :
 			{
 				mAT_IDENT(true);
-				_rettoken=_returnToken;
+				theRetToken=_returnToken;
 				break;
 			}
 			default:
-				if ((LA(1)==static_cast<unsigned char>('/')) && (LA(2)==static_cast<unsigned char>('/'))) {
+				if ((LA(1) == 0x2f /* '/' */ ) && (LA(2) == 0x2f /* '/' */ )) {
 					mCOMMENT_SL(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('/')) && (LA(2)==static_cast<unsigned char>('*'))) {
+				else if ((LA(1) == 0x2f /* '/' */ ) && (LA(2) == 0x2a /* '*' */ )) {
 					mCOMMENT_ML(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('U')) && (LA(2)==static_cast<unsigned char>('+'))) {
+				else if ((LA(1) == 0x55 /* 'U' */ ) && (LA(2) == 0x2b /* '+' */ )) {
 					mLIT_UHEX(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('.')) && (LA(2)==static_cast<unsigned char>('.'))) {
+				else if ((LA(1) == 0x2e /* '.' */ ) && (LA(2) == 0x2e /* '.' */ )) {
 					mOP_DOTDOT(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('<')) && (LA(2)==static_cast<unsigned char>('='))) {
+				else if ((LA(1) == 0x3c /* '<' */ ) && (LA(2) == 0x3d /* '=' */ )) {
 					mOP_LE(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('=')) && (LA(2)==static_cast<unsigned char>('='))) {
+				else if ((LA(1) == 0x3d /* '=' */ ) && (LA(2) == 0x3d /* '=' */ )) {
 					mOP_EQUALEQUAL(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('!')) && (LA(2)==static_cast<unsigned char>('='))) {
+				else if ((LA(1) == 0x21 /* '!' */ ) && (LA(2) == 0x3d /* '=' */ )) {
 					mOP_NE(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('>')) && (LA(2)==static_cast<unsigned char>('='))) {
+				else if ((LA(1) == 0x3e /* '>' */ ) && (LA(2) == 0x3d /* '=' */ )) {
 					mOP_GE(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('+')) && (LA(2)==static_cast<unsigned char>('='))) {
+				else if ((LA(1) == 0x2b /* '+' */ ) && (LA(2) == 0x3d /* '=' */ )) {
 					mOP_PLUSEQUAL(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('-')) && (LA(2)==static_cast<unsigned char>('='))) {
+				else if ((LA(1) == 0x2d /* '-' */ ) && (LA(2) == 0x3d /* '=' */ )) {
 					mOP_MINUSEQUAL(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('*')) && (LA(2)==static_cast<unsigned char>('='))) {
+				else if ((LA(1) == 0x2a /* '*' */ ) && (LA(2) == 0x3d /* '=' */ )) {
 					mOP_MULTEQUAL(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('/')) && (LA(2)==static_cast<unsigned char>('='))) {
+				else if ((LA(1) == 0x2f /* '/' */ ) && (LA(2) == 0x3d /* '=' */ )) {
 					mOP_DIVEQUAL(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('&')) && (LA(2)==static_cast<unsigned char>('='))) {
+				else if ((LA(1) == 0x26 /* '&' */ ) && (LA(2) == 0x3d /* '=' */ )) {
 					mOP_ANDEQUAL(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('#')) && (LA(2)==static_cast<unsigned char>('l'))) {
+				else if ((LA(1) == 0x23 /* '#' */ ) && (LA(2) == 0x6c /* 'l' */ )) {
 					mOP_LINEMARKER(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('&')) && (LA(2)==static_cast<unsigned char>('&'))) {
+				else if ((LA(1) == 0x26 /* '&' */ ) && (LA(2) == 0x26 /* '&' */ )) {
 					mOP_AND(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('|')) && (LA(2)==static_cast<unsigned char>('|'))) {
+				else if ((LA(1) == 0x7c /* '|' */ ) && (LA(2) == 0x7c /* '|' */ )) {
 					mOP_OR(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('.'))) {
+				else if ((LA(1) == 0x2e /* '.' */ ) && (true)) {
 					mOP_DOT(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('!'))) {
+				else if ((LA(1) == 0x21 /* '!' */ ) && (true)) {
 					mOP_NOT(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('<'))) {
+				else if ((LA(1) == 0x3c /* '<' */ ) && (true)) {
 					mOP_LT(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('='))) {
+				else if ((LA(1) == 0x3d /* '=' */ ) && (true)) {
 					mOP_EQ(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('>'))) {
+				else if ((LA(1) == 0x3e /* '>' */ ) && (true)) {
 					mOP_GT(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('+'))) {
+				else if ((LA(1) == 0x2b /* '+' */ ) && (true)) {
 					mOP_PLUS(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('-'))) {
+				else if ((LA(1) == 0x2d /* '-' */ ) && (true)) {
 					mOP_MINUS(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('*'))) {
+				else if ((LA(1) == 0x2a /* '*' */ ) && (true)) {
 					mOP_MULT(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('/'))) {
+				else if ((LA(1) == 0x2f /* '/' */ ) && (true)) {
 					mOP_DIV(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('#'))) {
+				else if ((LA(1) == 0x23 /* '#' */ ) && (true)) {
 					mOP_HASH(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('&'))) {
+				else if ((LA(1) == 0x26 /* '&' */ ) && (true)) {
 					mOP_BITAND(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((LA(1)==static_cast<unsigned char>('|'))) {
+				else if ((LA(1) == 0x7c /* '|' */ ) && (true)) {
 					mOP_BITOR(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
-				else if ((_tokenSet_0.member(LA(1)))) {
+				else if ((_tokenSet_0.member(LA(1))) && (true)) {
 					mIDENT(true);
-					_rettoken=_returnToken;
+					theRetToken=_returnToken;
 				}
 			else {
-				if (LA(1)==EOF_CHAR) {_returnToken = makeToken(Token::EOF_TYPE);}
-				else {throw ScannerException(std::string("no viable alt for char: ")+charName(LA(1)),getLine());}
+				if (LA(1)==EOF_CHAR)
+				{
+					uponEOF();
+					_returnToken = makeToken(ANTLR_USE_NAMESPACE(antlr)Token::EOF_TYPE);
+				}
+				else {throw ANTLR_USE_NAMESPACE(antlr)NoViableAltForCharException(LA(1), getFilename(), getLine(), getColumn());}
 			}
 			}
-			if ( !_returnToken ) goto tryAgain; // found SKIP token
+			if ( !_returnToken )
+				goto tryAgain; // found SKIP token
+
 			_ttype = _returnToken->getType();
 			_returnToken->setType(_ttype);
 			return _returnToken;
 		}
-		catch (ScannerException& e) {
-			reportError(e);
-			consume();
+		catch (ANTLR_USE_NAMESPACE(antlr)RecognitionException& e) {
+				throw ANTLR_USE_NAMESPACE(antlr)TokenStreamRecognitionException(e);
+		}
+		catch (ANTLR_USE_NAMESPACE(antlr)CharStreamIOException& csie) {
+			throw ANTLR_USE_NAMESPACE(antlr)TokenStreamIOException(csie.io);
+		}
+		catch (ANTLR_USE_NAMESPACE(antlr)CharStreamException& cse) {
+			throw ANTLR_USE_NAMESPACE(antlr)TokenStreamException(cse.getMessage());
 		}
 tryAgain:;
 	}
 }
 
 void GrpLexer::mWS(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = WS;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	{
 	switch ( LA(1)) {
-	case static_cast<unsigned char>(' '):
+	case 0x20 /* ' ' */ :
 	{
-		match(static_cast<unsigned char>(' '));
+		match(' ' /* charlit */ );
 		break;
 	}
-	case static_cast<unsigned char>('\t'):
+	case 0x9 /* '\t' */ :
 	{
-		match(static_cast<unsigned char>('\t'));
+		match('\t' /* charlit */ );
 		break;
 	}
-	case static_cast<unsigned char>('\14'):
+	case 0xc /* '\14' */ :
 	{
-		match(static_cast<unsigned char>('\14'));
+		match('\14' /* charlit */ );
 		break;
 	}
-	case static_cast<unsigned char>('\n'):
-	case static_cast<unsigned char>('\r'):
+	case 0xa /* '\n' */ :
+	case 0xd /* '\r' */ :
 	{
 		{
-		if ((LA(1)==static_cast<unsigned char>('\r')) && (LA(2)==static_cast<unsigned char>('\n'))) {
+		if ((LA(1) == 0xd /* '\r' */ ) && (LA(2) == 0xa /* '\n' */ )) {
 			match("\r\n");
 		}
-		else if ((LA(1)==static_cast<unsigned char>('\r'))) {
-			match(static_cast<unsigned char>('\r'));
+		else if ((LA(1) == 0xd /* '\r' */ ) && (true)) {
+			match('\r' /* charlit */ );
 		}
-		else if ((LA(1)==static_cast<unsigned char>('\n'))) {
-			match(static_cast<unsigned char>('\n'));
+		else if ((LA(1) == 0xa /* '\n' */ )) {
+			match('\n' /* charlit */ );
 		}
 		else {
-			throw ScannerException(std::string("no viable alt for char: ")+charName(LA(1)),getLine());
+			throw ANTLR_USE_NAMESPACE(antlr)NoViableAltForCharException(LA(1), getFilename(), getLine(), getColumn());
 		}
 		
 		}
+#line 963 "GrpParser.g"
 		newline();
+#line 423 "GrpLexer.cpp"
 		break;
 	}
 	default:
 	{
-		throw ScannerException(std::string("no viable alt for char: ")+charName(LA(1)),getLine());
+		throw ANTLR_USE_NAMESPACE(antlr)NoViableAltForCharException(LA(1), getFilename(), getLine(), getColumn());
 	}
 	}
 	}
+#line 965 "GrpParser.g"
 	_ttype = Token::SKIP;
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+#line 434 "GrpLexer.cpp"
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mCOMMENT_SL(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = COMMENT_SL;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("//");
-	{
-	do {
+	{ // ( ... )*
+	for (;;) {
 		if ((_tokenSet_1.member(LA(1)))) {
 			{
 			match(_tokenSet_1);
@@ -448,368 +456,117 @@ void GrpLexer::mCOMMENT_SL(bool _createToken) {
 			goto _loop435;
 		}
 		
-	} while (true);
-	_loop435:;
 	}
+	_loop435:;
+	} // ( ... )*
+#line 973 "GrpParser.g"
 	_ttype = Token::SKIP;
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+#line 465 "GrpLexer.cpp"
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mCOMMENT_ML(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = COMMENT_ML;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("/*");
-	{
-	do {
-		switch ( LA(1)) {
-		case static_cast<unsigned char>('\n'):
-		{
-			match(static_cast<unsigned char>('\n'));
-			newline();
-			break;
+	{ // ( ... )*
+	for (;;) {
+		if (((LA(1) == 0x2a /* '*' */ ) && ((LA(2) >= 0x0 /* '\0' */  && LA(2) <= 0xff)) && ((LA(3) >= 0x0 /* '\0' */  && LA(3) <= 0xff)))&&( LA(2)!='/' )) {
+			match('*' /* charlit */ );
 		}
-		case static_cast<unsigned char>('\0'):
-		case static_cast<unsigned char>('\1'):
-		case static_cast<unsigned char>('\2'):
-		case static_cast<unsigned char>('\3'):
-		case static_cast<unsigned char>('\4'):
-		case static_cast<unsigned char>('\5'):
-		case static_cast<unsigned char>('\6'):
-		case static_cast<unsigned char>('\7'):
-		case static_cast<unsigned char>('\10'):
-		case static_cast<unsigned char>('\t'):
-		case static_cast<unsigned char>('\13'):
-		case static_cast<unsigned char>('\14'):
-		case static_cast<unsigned char>('\r'):
-		case static_cast<unsigned char>('\16'):
-		case static_cast<unsigned char>('\17'):
-		case static_cast<unsigned char>('\20'):
-		case static_cast<unsigned char>('\21'):
-		case static_cast<unsigned char>('\22'):
-		case static_cast<unsigned char>('\23'):
-		case static_cast<unsigned char>('\24'):
-		case static_cast<unsigned char>('\25'):
-		case static_cast<unsigned char>('\26'):
-		case static_cast<unsigned char>('\27'):
-		case static_cast<unsigned char>('\30'):
-		case static_cast<unsigned char>('\31'):
-		case static_cast<unsigned char>('\32'):
-		case static_cast<unsigned char>('\33'):
-		case static_cast<unsigned char>('\34'):
-		case static_cast<unsigned char>('\35'):
-		case static_cast<unsigned char>('\36'):
-		case static_cast<unsigned char>('\37'):
-		case static_cast<unsigned char>(' '):
-		case static_cast<unsigned char>('!'):
-		case static_cast<unsigned char>('"'):
-		case static_cast<unsigned char>('#'):
-		case static_cast<unsigned char>('$'):
-		case static_cast<unsigned char>('%'):
-		case static_cast<unsigned char>('&'):
-		case static_cast<unsigned char>('\''):
-		case static_cast<unsigned char>('('):
-		case static_cast<unsigned char>(')'):
-		case static_cast<unsigned char>('+'):
-		case static_cast<unsigned char>(','):
-		case static_cast<unsigned char>('-'):
-		case static_cast<unsigned char>('.'):
-		case static_cast<unsigned char>('/'):
-		case static_cast<unsigned char>('0'):
-		case static_cast<unsigned char>('1'):
-		case static_cast<unsigned char>('2'):
-		case static_cast<unsigned char>('3'):
-		case static_cast<unsigned char>('4'):
-		case static_cast<unsigned char>('5'):
-		case static_cast<unsigned char>('6'):
-		case static_cast<unsigned char>('7'):
-		case static_cast<unsigned char>('8'):
-		case static_cast<unsigned char>('9'):
-		case static_cast<unsigned char>(':'):
-		case static_cast<unsigned char>(';'):
-		case static_cast<unsigned char>('<'):
-		case static_cast<unsigned char>('='):
-		case static_cast<unsigned char>('>'):
-		case static_cast<unsigned char>('?'):
-		case static_cast<unsigned char>('@'):
-		case static_cast<unsigned char>('A'):
-		case static_cast<unsigned char>('B'):
-		case static_cast<unsigned char>('C'):
-		case static_cast<unsigned char>('D'):
-		case static_cast<unsigned char>('E'):
-		case static_cast<unsigned char>('F'):
-		case static_cast<unsigned char>('G'):
-		case static_cast<unsigned char>('H'):
-		case static_cast<unsigned char>('I'):
-		case static_cast<unsigned char>('J'):
-		case static_cast<unsigned char>('K'):
-		case static_cast<unsigned char>('L'):
-		case static_cast<unsigned char>('M'):
-		case static_cast<unsigned char>('N'):
-		case static_cast<unsigned char>('O'):
-		case static_cast<unsigned char>('P'):
-		case static_cast<unsigned char>('Q'):
-		case static_cast<unsigned char>('R'):
-		case static_cast<unsigned char>('S'):
-		case static_cast<unsigned char>('T'):
-		case static_cast<unsigned char>('U'):
-		case static_cast<unsigned char>('V'):
-		case static_cast<unsigned char>('W'):
-		case static_cast<unsigned char>('X'):
-		case static_cast<unsigned char>('Y'):
-		case static_cast<unsigned char>('Z'):
-		case static_cast<unsigned char>('['):
-		case static_cast<unsigned char>('\\'):
-		case static_cast<unsigned char>(']'):
-		case static_cast<unsigned char>('^'):
-		case static_cast<unsigned char>('_'):
-		case static_cast<unsigned char>('`'):
-		case static_cast<unsigned char>('a'):
-		case static_cast<unsigned char>('b'):
-		case static_cast<unsigned char>('c'):
-		case static_cast<unsigned char>('d'):
-		case static_cast<unsigned char>('e'):
-		case static_cast<unsigned char>('f'):
-		case static_cast<unsigned char>('g'):
-		case static_cast<unsigned char>('h'):
-		case static_cast<unsigned char>('i'):
-		case static_cast<unsigned char>('j'):
-		case static_cast<unsigned char>('k'):
-		case static_cast<unsigned char>('l'):
-		case static_cast<unsigned char>('m'):
-		case static_cast<unsigned char>('n'):
-		case static_cast<unsigned char>('o'):
-		case static_cast<unsigned char>('p'):
-		case static_cast<unsigned char>('q'):
-		case static_cast<unsigned char>('r'):
-		case static_cast<unsigned char>('s'):
-		case static_cast<unsigned char>('t'):
-		case static_cast<unsigned char>('u'):
-		case static_cast<unsigned char>('v'):
-		case static_cast<unsigned char>('w'):
-		case static_cast<unsigned char>('x'):
-		case static_cast<unsigned char>('y'):
-		case static_cast<unsigned char>('z'):
-		case static_cast<unsigned char>('{'):
-		case static_cast<unsigned char>('|'):
-		case static_cast<unsigned char>('}'):
-		case static_cast<unsigned char>('~'):
-		case static_cast<unsigned char>('\177'):
-		case static_cast<unsigned char>('\200'):
-		case static_cast<unsigned char>('\201'):
-		case static_cast<unsigned char>('\202'):
-		case static_cast<unsigned char>('\203'):
-		case static_cast<unsigned char>('\204'):
-		case static_cast<unsigned char>('\205'):
-		case static_cast<unsigned char>('\206'):
-		case static_cast<unsigned char>('\207'):
-		case static_cast<unsigned char>('\210'):
-		case static_cast<unsigned char>('\211'):
-		case static_cast<unsigned char>('\212'):
-		case static_cast<unsigned char>('\213'):
-		case static_cast<unsigned char>('\214'):
-		case static_cast<unsigned char>('\215'):
-		case static_cast<unsigned char>('\216'):
-		case static_cast<unsigned char>('\217'):
-		case static_cast<unsigned char>('\220'):
-		case static_cast<unsigned char>('\221'):
-		case static_cast<unsigned char>('\222'):
-		case static_cast<unsigned char>('\223'):
-		case static_cast<unsigned char>('\224'):
-		case static_cast<unsigned char>('\225'):
-		case static_cast<unsigned char>('\226'):
-		case static_cast<unsigned char>('\227'):
-		case static_cast<unsigned char>('\230'):
-		case static_cast<unsigned char>('\231'):
-		case static_cast<unsigned char>('\232'):
-		case static_cast<unsigned char>('\233'):
-		case static_cast<unsigned char>('\234'):
-		case static_cast<unsigned char>('\235'):
-		case static_cast<unsigned char>('\236'):
-		case static_cast<unsigned char>('\237'):
-		case static_cast<unsigned char>('\240'):
-		case static_cast<unsigned char>('\241'):
-		case static_cast<unsigned char>('\242'):
-		case static_cast<unsigned char>('\243'):
-		case static_cast<unsigned char>('\244'):
-		case static_cast<unsigned char>('\245'):
-		case static_cast<unsigned char>('\246'):
-		case static_cast<unsigned char>('\247'):
-		case static_cast<unsigned char>('\250'):
-		case static_cast<unsigned char>('\251'):
-		case static_cast<unsigned char>('\252'):
-		case static_cast<unsigned char>('\253'):
-		case static_cast<unsigned char>('\254'):
-		case static_cast<unsigned char>('\255'):
-		case static_cast<unsigned char>('\256'):
-		case static_cast<unsigned char>('\257'):
-		case static_cast<unsigned char>('\260'):
-		case static_cast<unsigned char>('\261'):
-		case static_cast<unsigned char>('\262'):
-		case static_cast<unsigned char>('\263'):
-		case static_cast<unsigned char>('\264'):
-		case static_cast<unsigned char>('\265'):
-		case static_cast<unsigned char>('\266'):
-		case static_cast<unsigned char>('\267'):
-		case static_cast<unsigned char>('\270'):
-		case static_cast<unsigned char>('\271'):
-		case static_cast<unsigned char>('\272'):
-		case static_cast<unsigned char>('\273'):
-		case static_cast<unsigned char>('\274'):
-		case static_cast<unsigned char>('\275'):
-		case static_cast<unsigned char>('\276'):
-		case static_cast<unsigned char>('\277'):
-		case static_cast<unsigned char>('\300'):
-		case static_cast<unsigned char>('\301'):
-		case static_cast<unsigned char>('\302'):
-		case static_cast<unsigned char>('\303'):
-		case static_cast<unsigned char>('\304'):
-		case static_cast<unsigned char>('\305'):
-		case static_cast<unsigned char>('\306'):
-		case static_cast<unsigned char>('\307'):
-		case static_cast<unsigned char>('\310'):
-		case static_cast<unsigned char>('\311'):
-		case static_cast<unsigned char>('\312'):
-		case static_cast<unsigned char>('\313'):
-		case static_cast<unsigned char>('\314'):
-		case static_cast<unsigned char>('\315'):
-		case static_cast<unsigned char>('\316'):
-		case static_cast<unsigned char>('\317'):
-		case static_cast<unsigned char>('\320'):
-		case static_cast<unsigned char>('\321'):
-		case static_cast<unsigned char>('\322'):
-		case static_cast<unsigned char>('\323'):
-		case static_cast<unsigned char>('\324'):
-		case static_cast<unsigned char>('\325'):
-		case static_cast<unsigned char>('\326'):
-		case static_cast<unsigned char>('\327'):
-		case static_cast<unsigned char>('\330'):
-		case static_cast<unsigned char>('\331'):
-		case static_cast<unsigned char>('\332'):
-		case static_cast<unsigned char>('\333'):
-		case static_cast<unsigned char>('\334'):
-		case static_cast<unsigned char>('\335'):
-		case static_cast<unsigned char>('\336'):
-		case static_cast<unsigned char>('\337'):
-		case static_cast<unsigned char>('\340'):
-		case static_cast<unsigned char>('\341'):
-		case static_cast<unsigned char>('\342'):
-		case static_cast<unsigned char>('\343'):
-		case static_cast<unsigned char>('\344'):
-		case static_cast<unsigned char>('\345'):
-		case static_cast<unsigned char>('\346'):
-		case static_cast<unsigned char>('\347'):
-		case static_cast<unsigned char>('\350'):
-		case static_cast<unsigned char>('\351'):
-		case static_cast<unsigned char>('\352'):
-		case static_cast<unsigned char>('\353'):
-		case static_cast<unsigned char>('\354'):
-		case static_cast<unsigned char>('\355'):
-		case static_cast<unsigned char>('\356'):
-		case static_cast<unsigned char>('\357'):
-		case static_cast<unsigned char>('\360'):
-		case static_cast<unsigned char>('\361'):
-		case static_cast<unsigned char>('\362'):
-		case static_cast<unsigned char>('\363'):
-		case static_cast<unsigned char>('\364'):
-		case static_cast<unsigned char>('\365'):
-		case static_cast<unsigned char>('\366'):
-		case static_cast<unsigned char>('\367'):
-		case static_cast<unsigned char>('\370'):
-		case static_cast<unsigned char>('\371'):
-		case static_cast<unsigned char>('\372'):
-		case static_cast<unsigned char>('\373'):
-		case static_cast<unsigned char>('\374'):
-		case static_cast<unsigned char>('\375'):
-		case static_cast<unsigned char>('\376'):
-		case static_cast<unsigned char>('\377'):
-		{
+		else if ((LA(1) == 0xa /* '\n' */ )) {
+			match('\n' /* charlit */ );
+#line 978 "GrpParser.g"
+			newline();
+#line 489 "GrpLexer.cpp"
+		}
+		else if ((_tokenSet_2.member(LA(1)))) {
 			{
 			match(_tokenSet_2);
 			}
-			break;
 		}
-		default:
-			if (((LA(1)==static_cast<unsigned char>('*')) && ((LA(2) >= static_cast<unsigned char>('\0') && LA(2) <= static_cast<unsigned char>('\377'))) && ((LA(3) >= static_cast<unsigned char>('\0') && LA(3) <= static_cast<unsigned char>('\377'))))&&( LA(2)!='/' )) {
-				match(static_cast<unsigned char>('*'));
-			}
 		else {
 			goto _loop439;
 		}
-		}
-	} while (true);
-	_loop439:;
+		
 	}
+	_loop439:;
+	} // ( ... )*
 	match("*/");
+#line 982 "GrpParser.g"
 	_ttype = Token::SKIP;
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+#line 506 "GrpLexer.cpp"
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mLIT_INT(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = LIT_INT;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	{
-	if ((LA(1)==static_cast<unsigned char>('0')) && (LA(2)==static_cast<unsigned char>('x'))) {
+	if ((LA(1) == 0x30 /* '0' */ ) && (LA(2) == 0x78 /* 'x' */ )) {
 		{
 		match("0x");
-		{
+		{ // ( ... )+
 		int _cnt446=0;
-		do {
+		for (;;) {
 			if ((_tokenSet_3.member(LA(1)))) {
 				mXDIGIT(false);
 			}
 			else {
-				if ( _cnt446>=1 ) { goto _loop446; } else {throw ScannerException(std::string("no viable alt for char: ")+charName(LA(1)),getLine());}
+				if ( _cnt446>=1 ) { goto _loop446; } else {throw ANTLR_USE_NAMESPACE(antlr)NoViableAltForCharException(LA(1), getFilename(), getLine(), getColumn());}
 			}
 			
 			_cnt446++;
-		} while (true);
-		_loop446:;
 		}
+		_loop446:;
+		}  // ( ... )+
 		}
 	}
-	else if (((LA(1) >= static_cast<unsigned char>('0') && LA(1) <= static_cast<unsigned char>('9')))) {
-		{
+	else if (((LA(1) >= 0x30 /* '0' */  && LA(1) <= 0x39 /* '9' */ )) && (true)) {
+		{ // ( ... )+
 		int _cnt443=0;
-		do {
-			if (((LA(1) >= static_cast<unsigned char>('0') && LA(1) <= static_cast<unsigned char>('9')))) {
+		for (;;) {
+			if (((LA(1) >= 0x30 /* '0' */  && LA(1) <= 0x39 /* '9' */ ))) {
 				mDIGIT(false);
 			}
 			else {
-				if ( _cnt443>=1 ) { goto _loop443; } else {throw ScannerException(std::string("no viable alt for char: ")+charName(LA(1)),getLine());}
+				if ( _cnt443>=1 ) { goto _loop443; } else {throw ANTLR_USE_NAMESPACE(antlr)NoViableAltForCharException(LA(1), getFilename(), getLine(), getColumn());}
 			}
 			
 			_cnt443++;
-		} while (true);
-		_loop443:;
 		}
+		_loop443:;
+		}  // ( ... )+
 	}
 	else {
-		throw ScannerException(std::string("no viable alt for char: ")+charName(LA(1)),getLine());
+		throw ANTLR_USE_NAMESPACE(antlr)NoViableAltForCharException(LA(1), getFilename(), getLine(), getColumn());
 	}
 	
 	}
 	{
 	switch ( LA(1)) {
-	case static_cast<unsigned char>('m'):
+	case 0x6d /* 'm' */ :
 	{
-		match(static_cast<unsigned char>('m'));
+		match('m' /* charlit */ );
 		break;
 	}
-	case static_cast<unsigned char>('M'):
+	case 0x4d /* 'M' */ :
 	{
-		match(static_cast<unsigned char>('M'));
+		match('M' /* charlit */ );
 		break;
 	}
 	default:
@@ -817,247 +574,254 @@ void GrpLexer::mLIT_INT(bool _createToken) {
 		}
 	}
 	}
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mDIGIT(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = DIGIT;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	matchRange(static_cast<unsigned char>('0'),static_cast<unsigned char>('9'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	matchRange('0','9');
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mXDIGIT(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = XDIGIT;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	switch ( LA(1)) {
-	case static_cast<unsigned char>('0'):
-	case static_cast<unsigned char>('1'):
-	case static_cast<unsigned char>('2'):
-	case static_cast<unsigned char>('3'):
-	case static_cast<unsigned char>('4'):
-	case static_cast<unsigned char>('5'):
-	case static_cast<unsigned char>('6'):
-	case static_cast<unsigned char>('7'):
-	case static_cast<unsigned char>('8'):
-	case static_cast<unsigned char>('9'):
+	case 0x30 /* '0' */ :
+	case 0x31 /* '1' */ :
+	case 0x32 /* '2' */ :
+	case 0x33 /* '3' */ :
+	case 0x34 /* '4' */ :
+	case 0x35 /* '5' */ :
+	case 0x36 /* '6' */ :
+	case 0x37 /* '7' */ :
+	case 0x38 /* '8' */ :
+	case 0x39 /* '9' */ :
 	{
-		matchRange(static_cast<unsigned char>('0'),static_cast<unsigned char>('9'));
+		matchRange('0','9');
 		break;
 	}
-	case static_cast<unsigned char>('a'):
-	case static_cast<unsigned char>('b'):
-	case static_cast<unsigned char>('c'):
-	case static_cast<unsigned char>('d'):
-	case static_cast<unsigned char>('e'):
-	case static_cast<unsigned char>('f'):
+	case 0x61 /* 'a' */ :
+	case 0x62 /* 'b' */ :
+	case 0x63 /* 'c' */ :
+	case 0x64 /* 'd' */ :
+	case 0x65 /* 'e' */ :
+	case 0x66 /* 'f' */ :
 	{
-		matchRange(static_cast<unsigned char>('a'),static_cast<unsigned char>('f'));
+		matchRange('a','f');
 		break;
 	}
-	case static_cast<unsigned char>('A'):
-	case static_cast<unsigned char>('B'):
-	case static_cast<unsigned char>('C'):
-	case static_cast<unsigned char>('D'):
-	case static_cast<unsigned char>('E'):
-	case static_cast<unsigned char>('F'):
+	case 0x41 /* 'A' */ :
+	case 0x42 /* 'B' */ :
+	case 0x43 /* 'C' */ :
+	case 0x44 /* 'D' */ :
+	case 0x45 /* 'E' */ :
+	case 0x46 /* 'F' */ :
 	{
-		matchRange(static_cast<unsigned char>('A'),static_cast<unsigned char>('F'));
+		matchRange('A','F');
 		break;
 	}
 	default:
 	{
-		throw ScannerException(std::string("no viable alt for char: ")+charName(LA(1)),getLine());
+		throw ANTLR_USE_NAMESPACE(antlr)NoViableAltForCharException(LA(1), getFilename(), getLine(), getColumn());
 	}
 	}
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mLIT_UHEX(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = LIT_UHEX;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("U+");
-	{
+	{ // ( ... )+
 	int _cnt450=0;
-	do {
+	for (;;) {
 		if ((_tokenSet_3.member(LA(1)))) {
 			mXDIGIT(false);
 		}
 		else {
-			if ( _cnt450>=1 ) { goto _loop450; } else {throw ScannerException(std::string("no viable alt for char: ")+charName(LA(1)),getLine());}
+			if ( _cnt450>=1 ) { goto _loop450; } else {throw ANTLR_USE_NAMESPACE(antlr)NoViableAltForCharException(LA(1), getFilename(), getLine(), getColumn());}
 		}
 		
 		_cnt450++;
-	} while (true);
-	_loop450:;
 	}
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	_loop450:;
+	}  // ( ... )+
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mLIT_CHAR(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = LIT_CHAR;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	_saveIndex=text.length();
+	_saveIndex = text.length();
 	mSQUOTE(false);
 	text.erase(_saveIndex);
 	{
-	if ((LA(1)==static_cast<unsigned char>('\\')) && (_tokenSet_4.member(LA(2))) && (LA(3)==static_cast<unsigned char>('\'')||LA(3)==static_cast<unsigned char>('\221')||LA(3)==static_cast<unsigned char>('\222'))) {
+	if ((LA(1) == 0x5c /* '\\' */ ) && (_tokenSet_4.member(LA(2))) && (LA(3) == 0x27 /* '\'' */  || LA(3) == 0x91 || LA(3) == 0x92)) {
 		mESC(false);
 	}
-	else if ((_tokenSet_5.member(LA(1))) && (LA(2)==static_cast<unsigned char>('\'')||LA(2)==static_cast<unsigned char>('\221')||LA(2)==static_cast<unsigned char>('\222'))) {
+	else if ((_tokenSet_5.member(LA(1))) && (LA(2) == 0x27 /* '\'' */  || LA(2) == 0x91 || LA(2) == 0x92) && (true)) {
 		{
 		match(_tokenSet_5);
 		}
 	}
 	else {
-		throw ScannerException(std::string("no viable alt for char: ")+charName(LA(1)),getLine());
+		throw ANTLR_USE_NAMESPACE(antlr)NoViableAltForCharException(LA(1), getFilename(), getLine(), getColumn());
 	}
 	
 	}
-	_saveIndex=text.length();
+	_saveIndex = text.length();
 	mSQUOTE(false);
 	text.erase(_saveIndex);
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mSQUOTE(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = SQUOTE;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	{
 	switch ( LA(1)) {
-	case static_cast<unsigned char>('\''):
+	case 0x27 /* '\'' */ :
 	{
-		match(static_cast<unsigned char>('\''));
+		match('\'' /* charlit */ );
 		break;
 	}
-	case static_cast<unsigned char>('\221'):
+	case 0x91:
 	{
-		match(static_cast<unsigned char>('\221'));
+		match(static_cast<unsigned char>('\221') /* charlit */ );
 		break;
 	}
-	case static_cast<unsigned char>('\222'):
+	case 0x92:
 	{
-		match(static_cast<unsigned char>('\222'));
+		match(static_cast<unsigned char>('\222') /* charlit */ );
 		break;
 	}
 	default:
 	{
-		throw ScannerException(std::string("no viable alt for char: ")+charName(LA(1)),getLine());
+		throw ANTLR_USE_NAMESPACE(antlr)NoViableAltForCharException(LA(1), getFilename(), getLine(), getColumn());
 	}
 	}
 	}
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mESC(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = ESC;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('\\'));
+	match('\\' /* charlit */ );
 	{
 	switch ( LA(1)) {
-	case static_cast<unsigned char>('n'):
+	case 0x6e /* 'n' */ :
 	{
-		match(static_cast<unsigned char>('n'));
+		match('n' /* charlit */ );
 		break;
 	}
-	case static_cast<unsigned char>('r'):
+	case 0x72 /* 'r' */ :
 	{
-		match(static_cast<unsigned char>('r'));
+		match('r' /* charlit */ );
 		break;
 	}
-	case static_cast<unsigned char>('t'):
+	case 0x74 /* 't' */ :
 	{
-		match(static_cast<unsigned char>('t'));
+		match('t' /* charlit */ );
 		break;
 	}
-	case static_cast<unsigned char>('b'):
+	case 0x62 /* 'b' */ :
 	{
-		match(static_cast<unsigned char>('b'));
+		match('b' /* charlit */ );
 		break;
 	}
-	case static_cast<unsigned char>('f'):
+	case 0x66 /* 'f' */ :
 	{
-		match(static_cast<unsigned char>('f'));
+		match('f' /* charlit */ );
 		break;
 	}
-	case static_cast<unsigned char>('"'):
+	case 0x22 /* '\"' */ :
 	{
-		match(static_cast<unsigned char>('"'));
+		match('\"' /* charlit */ );
 		break;
 	}
-	case static_cast<unsigned char>('\''):
+	case 0x27 /* '\'' */ :
 	{
-		match(static_cast<unsigned char>('\''));
+		match('\'' /* charlit */ );
 		break;
 	}
-	case static_cast<unsigned char>('\\'):
+	case 0x5c /* '\\' */ :
 	{
-		match(static_cast<unsigned char>('\\'));
+		match('\\' /* charlit */ );
 		break;
 	}
 	default:
 	{
-		throw ScannerException(std::string("no viable alt for char: ")+charName(LA(1)),getLine());
+		throw ANTLR_USE_NAMESPACE(antlr)NoViableAltForCharException(LA(1), getFilename(), getLine(), getColumn());
 	}
 	}
 	}
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mLIT_STRING(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = LIT_STRING;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	_saveIndex=text.length();
+	_saveIndex = text.length();
 	mDQUOTE(false);
 	text.erase(_saveIndex);
-	{
-	do {
-		if ((LA(1)==static_cast<unsigned char>('\\')) && (_tokenSet_4.member(LA(2))) && ((LA(3) >= static_cast<unsigned char>('\0') && LA(3) <= static_cast<unsigned char>('\377')))) {
+	{ // ( ... )*
+	for (;;) {
+		if ((LA(1) == 0x5c /* '\\' */ ) && (_tokenSet_4.member(LA(2))) && ((LA(3) >= 0x0 /* '\0' */  && LA(3) <= 0xff)) && (true) && (true) && (true)) {
 			mESC(false);
 		}
-		else if ((_tokenSet_6.member(LA(1))) && ((LA(2) >= static_cast<unsigned char>('\0') && LA(2) <= static_cast<unsigned char>('\377')))) {
+		else if ((_tokenSet_6.member(LA(1))) && ((LA(2) >= 0x0 /* '\0' */  && LA(2) <= 0xff)) && (true) && (true) && (true) && (true)) {
 			{
 			match(_tokenSet_6);
 			}
@@ -1066,740 +830,783 @@ void GrpLexer::mLIT_STRING(bool _createToken) {
 			goto _loop457;
 		}
 		
-	} while (true);
-	_loop457:;
 	}
-	_saveIndex=text.length();
+	_loop457:;
+	} // ( ... )*
+	_saveIndex = text.length();
 	mDQUOTE(false);
 	text.erase(_saveIndex);
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mDQUOTE(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = DQUOTE;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	{
 	switch ( LA(1)) {
-	case static_cast<unsigned char>('"'):
+	case 0x22 /* '\"' */ :
 	{
-		match(static_cast<unsigned char>('"'));
+		match('\"' /* charlit */ );
 		break;
 	}
-	case static_cast<unsigned char>('\223'):
+	case 0x93:
 	{
-		match(static_cast<unsigned char>('\223'));
+		match(static_cast<unsigned char>('\223') /* charlit */ );
 		break;
 	}
-	case static_cast<unsigned char>('\224'):
+	case 0x94:
 	{
-		match(static_cast<unsigned char>('\224'));
+		match(static_cast<unsigned char>('\224') /* charlit */ );
 		break;
 	}
 	default:
 	{
-		throw ScannerException(std::string("no viable alt for char: ")+charName(LA(1)),getLine());
+		throw ANTLR_USE_NAMESPACE(antlr)NoViableAltForCharException(LA(1), getFilename(), getLine(), getColumn());
 	}
 	}
 	}
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mODIGIT(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = ODIGIT;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	matchRange(static_cast<unsigned char>('0'),static_cast<unsigned char>('7'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	matchRange('0','7');
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_DOT(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_DOT;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('.'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('.' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_DOTDOT(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_DOTDOT;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("..");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_COLON(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_COLON;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>(':'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match(':' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_SEMI(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_SEMI;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>(';'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match(';' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_LBRACKET(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_LBRACKET;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('['));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('[' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_RBRACKET(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_RBRACKET;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>(']'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match(']' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_LPAREN(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_LPAREN;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('('));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('(' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_RPAREN(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_RPAREN;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>(')'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match(')' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_LBRACE(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_LBRACE;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('{'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('{' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_RBRACE(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_RBRACE;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('}'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('}' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_NOT(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_NOT;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('!'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('!' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_LT(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_LT;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('<'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('<' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_LE(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_LE;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("<=");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_EQ(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_EQ;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('='));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('=' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_EQUALEQUAL(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_EQUALEQUAL;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("==");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_NE(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_NE;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("!=");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_GE(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_GE;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match(">=");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_GT(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_GT;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('>'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('>' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_PLUS(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_PLUS;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('+'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('+' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_PLUSEQUAL(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_PLUSEQUAL;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("+=");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_MINUS(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_MINUS;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('-'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('-' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_MINUSEQUAL(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_MINUSEQUAL;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("-=");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_MULT(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_MULT;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('*'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('*' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_MULTEQUAL(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_MULTEQUAL;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("*=");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_DIV(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_DIV;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('/'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('/' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_DIVEQUAL(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_DIVEQUAL;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("/=");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_ANDEQUAL(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_ANDEQUAL;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("&=");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_COMMA(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_COMMA;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>(','));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match(',' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_DOLLAR(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_DOLLAR;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('$'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('$' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_LINEMARKER(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_LINEMARKER;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("#line");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_HASH(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_HASH;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('#'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('#' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_AND(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_AND;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("&&");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_OR(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_OR;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("||");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_BITAND(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_BITAND;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("&");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_BITOR(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_BITOR;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("|");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_BITNOT(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_BITNOT;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	match("~");
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_BSLASH(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_BSLASH;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('\\'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('\\' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_UNDER(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_UNDER;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('_'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('_' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_QUESTION(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_QUESTION;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('?'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('?' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mOP_CARET(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = OP_CARET;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
-	match(static_cast<unsigned char>('^'));
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	match('^' /* charlit */ );
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mIDENT(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = IDENT;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	{
 	switch ( LA(1)) {
-	case static_cast<unsigned char>('a'):
-	case static_cast<unsigned char>('b'):
-	case static_cast<unsigned char>('c'):
-	case static_cast<unsigned char>('d'):
-	case static_cast<unsigned char>('e'):
-	case static_cast<unsigned char>('f'):
-	case static_cast<unsigned char>('g'):
-	case static_cast<unsigned char>('h'):
-	case static_cast<unsigned char>('i'):
-	case static_cast<unsigned char>('j'):
-	case static_cast<unsigned char>('k'):
-	case static_cast<unsigned char>('l'):
-	case static_cast<unsigned char>('m'):
-	case static_cast<unsigned char>('n'):
-	case static_cast<unsigned char>('o'):
-	case static_cast<unsigned char>('p'):
-	case static_cast<unsigned char>('q'):
-	case static_cast<unsigned char>('r'):
-	case static_cast<unsigned char>('s'):
-	case static_cast<unsigned char>('t'):
-	case static_cast<unsigned char>('u'):
-	case static_cast<unsigned char>('v'):
-	case static_cast<unsigned char>('w'):
-	case static_cast<unsigned char>('x'):
-	case static_cast<unsigned char>('y'):
-	case static_cast<unsigned char>('z'):
+	case 0x61 /* 'a' */ :
+	case 0x62 /* 'b' */ :
+	case 0x63 /* 'c' */ :
+	case 0x64 /* 'd' */ :
+	case 0x65 /* 'e' */ :
+	case 0x66 /* 'f' */ :
+	case 0x67 /* 'g' */ :
+	case 0x68 /* 'h' */ :
+	case 0x69 /* 'i' */ :
+	case 0x6a /* 'j' */ :
+	case 0x6b /* 'k' */ :
+	case 0x6c /* 'l' */ :
+	case 0x6d /* 'm' */ :
+	case 0x6e /* 'n' */ :
+	case 0x6f /* 'o' */ :
+	case 0x70 /* 'p' */ :
+	case 0x71 /* 'q' */ :
+	case 0x72 /* 'r' */ :
+	case 0x73 /* 's' */ :
+	case 0x74 /* 't' */ :
+	case 0x75 /* 'u' */ :
+	case 0x76 /* 'v' */ :
+	case 0x77 /* 'w' */ :
+	case 0x78 /* 'x' */ :
+	case 0x79 /* 'y' */ :
+	case 0x7a /* 'z' */ :
 	{
-		matchRange(static_cast<unsigned char>('a'),static_cast<unsigned char>('z'));
+		matchRange('a','z');
 		break;
 	}
-	case static_cast<unsigned char>('A'):
-	case static_cast<unsigned char>('B'):
-	case static_cast<unsigned char>('C'):
-	case static_cast<unsigned char>('D'):
-	case static_cast<unsigned char>('E'):
-	case static_cast<unsigned char>('F'):
-	case static_cast<unsigned char>('G'):
-	case static_cast<unsigned char>('H'):
-	case static_cast<unsigned char>('I'):
-	case static_cast<unsigned char>('J'):
-	case static_cast<unsigned char>('K'):
-	case static_cast<unsigned char>('L'):
-	case static_cast<unsigned char>('M'):
-	case static_cast<unsigned char>('N'):
-	case static_cast<unsigned char>('O'):
-	case static_cast<unsigned char>('P'):
-	case static_cast<unsigned char>('Q'):
-	case static_cast<unsigned char>('R'):
-	case static_cast<unsigned char>('S'):
-	case static_cast<unsigned char>('T'):
-	case static_cast<unsigned char>('U'):
-	case static_cast<unsigned char>('V'):
-	case static_cast<unsigned char>('W'):
-	case static_cast<unsigned char>('X'):
-	case static_cast<unsigned char>('Y'):
-	case static_cast<unsigned char>('Z'):
+	case 0x41 /* 'A' */ :
+	case 0x42 /* 'B' */ :
+	case 0x43 /* 'C' */ :
+	case 0x44 /* 'D' */ :
+	case 0x45 /* 'E' */ :
+	case 0x46 /* 'F' */ :
+	case 0x47 /* 'G' */ :
+	case 0x48 /* 'H' */ :
+	case 0x49 /* 'I' */ :
+	case 0x4a /* 'J' */ :
+	case 0x4b /* 'K' */ :
+	case 0x4c /* 'L' */ :
+	case 0x4d /* 'M' */ :
+	case 0x4e /* 'N' */ :
+	case 0x4f /* 'O' */ :
+	case 0x50 /* 'P' */ :
+	case 0x51 /* 'Q' */ :
+	case 0x52 /* 'R' */ :
+	case 0x53 /* 'S' */ :
+	case 0x54 /* 'T' */ :
+	case 0x55 /* 'U' */ :
+	case 0x56 /* 'V' */ :
+	case 0x57 /* 'W' */ :
+	case 0x58 /* 'X' */ :
+	case 0x59 /* 'Y' */ :
+	case 0x5a /* 'Z' */ :
 	{
-		matchRange(static_cast<unsigned char>('A'),static_cast<unsigned char>('Z'));
+		matchRange('A','Z');
 		break;
 	}
 	default:
 	{
-		throw ScannerException(std::string("no viable alt for char: ")+charName(LA(1)),getLine());
+		throw ANTLR_USE_NAMESPACE(antlr)NoViableAltForCharException(LA(1), getFilename(), getLine(), getColumn());
 	}
 	}
 	}
-	{
-	do {
+	{ // ( ... )*
+	for (;;) {
 		switch ( LA(1)) {
-		case static_cast<unsigned char>('_'):
+		case 0x5f /* '_' */ :
 		{
-			match(static_cast<unsigned char>('_'));
+			match('_' /* charlit */ );
 			break;
 		}
-		case static_cast<unsigned char>('a'):
-		case static_cast<unsigned char>('b'):
-		case static_cast<unsigned char>('c'):
-		case static_cast<unsigned char>('d'):
-		case static_cast<unsigned char>('e'):
-		case static_cast<unsigned char>('f'):
-		case static_cast<unsigned char>('g'):
-		case static_cast<unsigned char>('h'):
-		case static_cast<unsigned char>('i'):
-		case static_cast<unsigned char>('j'):
-		case static_cast<unsigned char>('k'):
-		case static_cast<unsigned char>('l'):
-		case static_cast<unsigned char>('m'):
-		case static_cast<unsigned char>('n'):
-		case static_cast<unsigned char>('o'):
-		case static_cast<unsigned char>('p'):
-		case static_cast<unsigned char>('q'):
-		case static_cast<unsigned char>('r'):
-		case static_cast<unsigned char>('s'):
-		case static_cast<unsigned char>('t'):
-		case static_cast<unsigned char>('u'):
-		case static_cast<unsigned char>('v'):
-		case static_cast<unsigned char>('w'):
-		case static_cast<unsigned char>('x'):
-		case static_cast<unsigned char>('y'):
-		case static_cast<unsigned char>('z'):
+		case 0x61 /* 'a' */ :
+		case 0x62 /* 'b' */ :
+		case 0x63 /* 'c' */ :
+		case 0x64 /* 'd' */ :
+		case 0x65 /* 'e' */ :
+		case 0x66 /* 'f' */ :
+		case 0x67 /* 'g' */ :
+		case 0x68 /* 'h' */ :
+		case 0x69 /* 'i' */ :
+		case 0x6a /* 'j' */ :
+		case 0x6b /* 'k' */ :
+		case 0x6c /* 'l' */ :
+		case 0x6d /* 'm' */ :
+		case 0x6e /* 'n' */ :
+		case 0x6f /* 'o' */ :
+		case 0x70 /* 'p' */ :
+		case 0x71 /* 'q' */ :
+		case 0x72 /* 'r' */ :
+		case 0x73 /* 's' */ :
+		case 0x74 /* 't' */ :
+		case 0x75 /* 'u' */ :
+		case 0x76 /* 'v' */ :
+		case 0x77 /* 'w' */ :
+		case 0x78 /* 'x' */ :
+		case 0x79 /* 'y' */ :
+		case 0x7a /* 'z' */ :
 		{
-			matchRange(static_cast<unsigned char>('a'),static_cast<unsigned char>('z'));
+			matchRange('a','z');
 			break;
 		}
-		case static_cast<unsigned char>('A'):
-		case static_cast<unsigned char>('B'):
-		case static_cast<unsigned char>('C'):
-		case static_cast<unsigned char>('D'):
-		case static_cast<unsigned char>('E'):
-		case static_cast<unsigned char>('F'):
-		case static_cast<unsigned char>('G'):
-		case static_cast<unsigned char>('H'):
-		case static_cast<unsigned char>('I'):
-		case static_cast<unsigned char>('J'):
-		case static_cast<unsigned char>('K'):
-		case static_cast<unsigned char>('L'):
-		case static_cast<unsigned char>('M'):
-		case static_cast<unsigned char>('N'):
-		case static_cast<unsigned char>('O'):
-		case static_cast<unsigned char>('P'):
-		case static_cast<unsigned char>('Q'):
-		case static_cast<unsigned char>('R'):
-		case static_cast<unsigned char>('S'):
-		case static_cast<unsigned char>('T'):
-		case static_cast<unsigned char>('U'):
-		case static_cast<unsigned char>('V'):
-		case static_cast<unsigned char>('W'):
-		case static_cast<unsigned char>('X'):
-		case static_cast<unsigned char>('Y'):
-		case static_cast<unsigned char>('Z'):
+		case 0x41 /* 'A' */ :
+		case 0x42 /* 'B' */ :
+		case 0x43 /* 'C' */ :
+		case 0x44 /* 'D' */ :
+		case 0x45 /* 'E' */ :
+		case 0x46 /* 'F' */ :
+		case 0x47 /* 'G' */ :
+		case 0x48 /* 'H' */ :
+		case 0x49 /* 'I' */ :
+		case 0x4a /* 'J' */ :
+		case 0x4b /* 'K' */ :
+		case 0x4c /* 'L' */ :
+		case 0x4d /* 'M' */ :
+		case 0x4e /* 'N' */ :
+		case 0x4f /* 'O' */ :
+		case 0x50 /* 'P' */ :
+		case 0x51 /* 'Q' */ :
+		case 0x52 /* 'R' */ :
+		case 0x53 /* 'S' */ :
+		case 0x54 /* 'T' */ :
+		case 0x55 /* 'U' */ :
+		case 0x56 /* 'V' */ :
+		case 0x57 /* 'W' */ :
+		case 0x58 /* 'X' */ :
+		case 0x59 /* 'Y' */ :
+		case 0x5a /* 'Z' */ :
 		{
-			matchRange(static_cast<unsigned char>('A'),static_cast<unsigned char>('Z'));
+			matchRange('A','Z');
 			break;
 		}
-		case static_cast<unsigned char>('0'):
-		case static_cast<unsigned char>('1'):
-		case static_cast<unsigned char>('2'):
-		case static_cast<unsigned char>('3'):
-		case static_cast<unsigned char>('4'):
-		case static_cast<unsigned char>('5'):
-		case static_cast<unsigned char>('6'):
-		case static_cast<unsigned char>('7'):
-		case static_cast<unsigned char>('8'):
-		case static_cast<unsigned char>('9'):
+		case 0x30 /* '0' */ :
+		case 0x31 /* '1' */ :
+		case 0x32 /* '2' */ :
+		case 0x33 /* '3' */ :
+		case 0x34 /* '4' */ :
+		case 0x35 /* '5' */ :
+		case 0x36 /* '6' */ :
+		case 0x37 /* '7' */ :
+		case 0x38 /* '8' */ :
+		case 0x39 /* '9' */ :
 		{
-			matchRange(static_cast<unsigned char>('0'),static_cast<unsigned char>('9'));
+			matchRange('0','9');
 			break;
 		}
 		default:
@@ -1807,31 +1614,32 @@ void GrpLexer::mIDENT(bool _createToken) {
 			goto _loop510;
 		}
 		}
-	} while (true);
-	_loop510:;
 	}
+	_loop510:;
+	} // ( ... )*
 	_ttype = testLiteralsTable(_ttype);
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 void GrpLexer::mAT_IDENT(bool _createToken) {
-	int _ttype; RefToken _token; int _begin=text.length();
+	int _ttype; ANTLR_USE_NAMESPACE(antlr)RefToken _token; ANTLR_USE_NAMESPACE(std)string::size_type _begin = text.length();
 	_ttype = AT_IDENT;
-	int _saveIndex;
+	ANTLR_USE_NAMESPACE(std)string::size_type _saveIndex;
 	
 	{
-	if ((LA(1)==static_cast<unsigned char>('@')) && (LA(2)==static_cast<unsigned char>(':'))) {
+	if ((LA(1) == 0x40 /* '@' */ ) && (LA(2) == 0x3a /* ':' */ )) {
 		match("@:");
 	}
-	else if ((LA(1)==static_cast<unsigned char>('@'))) {
-		match(static_cast<unsigned char>('@'));
+	else if ((LA(1) == 0x40 /* '@' */ ) && (true)) {
+		match('@' /* charlit */ );
 	}
 	else {
-		throw ScannerException(std::string("no viable alt for char: ")+charName(LA(1)),getLine());
+		throw ANTLR_USE_NAMESPACE(antlr)NoViableAltForCharException(LA(1), getFilename(), getLine(), getColumn());
 	}
 	
 	}
@@ -1839,152 +1647,152 @@ void GrpLexer::mAT_IDENT(bool _createToken) {
 	if ((_tokenSet_0.member(LA(1)))) {
 		{
 		switch ( LA(1)) {
-		case static_cast<unsigned char>('a'):
-		case static_cast<unsigned char>('b'):
-		case static_cast<unsigned char>('c'):
-		case static_cast<unsigned char>('d'):
-		case static_cast<unsigned char>('e'):
-		case static_cast<unsigned char>('f'):
-		case static_cast<unsigned char>('g'):
-		case static_cast<unsigned char>('h'):
-		case static_cast<unsigned char>('i'):
-		case static_cast<unsigned char>('j'):
-		case static_cast<unsigned char>('k'):
-		case static_cast<unsigned char>('l'):
-		case static_cast<unsigned char>('m'):
-		case static_cast<unsigned char>('n'):
-		case static_cast<unsigned char>('o'):
-		case static_cast<unsigned char>('p'):
-		case static_cast<unsigned char>('q'):
-		case static_cast<unsigned char>('r'):
-		case static_cast<unsigned char>('s'):
-		case static_cast<unsigned char>('t'):
-		case static_cast<unsigned char>('u'):
-		case static_cast<unsigned char>('v'):
-		case static_cast<unsigned char>('w'):
-		case static_cast<unsigned char>('x'):
-		case static_cast<unsigned char>('y'):
-		case static_cast<unsigned char>('z'):
+		case 0x61 /* 'a' */ :
+		case 0x62 /* 'b' */ :
+		case 0x63 /* 'c' */ :
+		case 0x64 /* 'd' */ :
+		case 0x65 /* 'e' */ :
+		case 0x66 /* 'f' */ :
+		case 0x67 /* 'g' */ :
+		case 0x68 /* 'h' */ :
+		case 0x69 /* 'i' */ :
+		case 0x6a /* 'j' */ :
+		case 0x6b /* 'k' */ :
+		case 0x6c /* 'l' */ :
+		case 0x6d /* 'm' */ :
+		case 0x6e /* 'n' */ :
+		case 0x6f /* 'o' */ :
+		case 0x70 /* 'p' */ :
+		case 0x71 /* 'q' */ :
+		case 0x72 /* 'r' */ :
+		case 0x73 /* 's' */ :
+		case 0x74 /* 't' */ :
+		case 0x75 /* 'u' */ :
+		case 0x76 /* 'v' */ :
+		case 0x77 /* 'w' */ :
+		case 0x78 /* 'x' */ :
+		case 0x79 /* 'y' */ :
+		case 0x7a /* 'z' */ :
 		{
-			matchRange(static_cast<unsigned char>('a'),static_cast<unsigned char>('z'));
+			matchRange('a','z');
 			break;
 		}
-		case static_cast<unsigned char>('A'):
-		case static_cast<unsigned char>('B'):
-		case static_cast<unsigned char>('C'):
-		case static_cast<unsigned char>('D'):
-		case static_cast<unsigned char>('E'):
-		case static_cast<unsigned char>('F'):
-		case static_cast<unsigned char>('G'):
-		case static_cast<unsigned char>('H'):
-		case static_cast<unsigned char>('I'):
-		case static_cast<unsigned char>('J'):
-		case static_cast<unsigned char>('K'):
-		case static_cast<unsigned char>('L'):
-		case static_cast<unsigned char>('M'):
-		case static_cast<unsigned char>('N'):
-		case static_cast<unsigned char>('O'):
-		case static_cast<unsigned char>('P'):
-		case static_cast<unsigned char>('Q'):
-		case static_cast<unsigned char>('R'):
-		case static_cast<unsigned char>('S'):
-		case static_cast<unsigned char>('T'):
-		case static_cast<unsigned char>('U'):
-		case static_cast<unsigned char>('V'):
-		case static_cast<unsigned char>('W'):
-		case static_cast<unsigned char>('X'):
-		case static_cast<unsigned char>('Y'):
-		case static_cast<unsigned char>('Z'):
+		case 0x41 /* 'A' */ :
+		case 0x42 /* 'B' */ :
+		case 0x43 /* 'C' */ :
+		case 0x44 /* 'D' */ :
+		case 0x45 /* 'E' */ :
+		case 0x46 /* 'F' */ :
+		case 0x47 /* 'G' */ :
+		case 0x48 /* 'H' */ :
+		case 0x49 /* 'I' */ :
+		case 0x4a /* 'J' */ :
+		case 0x4b /* 'K' */ :
+		case 0x4c /* 'L' */ :
+		case 0x4d /* 'M' */ :
+		case 0x4e /* 'N' */ :
+		case 0x4f /* 'O' */ :
+		case 0x50 /* 'P' */ :
+		case 0x51 /* 'Q' */ :
+		case 0x52 /* 'R' */ :
+		case 0x53 /* 'S' */ :
+		case 0x54 /* 'T' */ :
+		case 0x55 /* 'U' */ :
+		case 0x56 /* 'V' */ :
+		case 0x57 /* 'W' */ :
+		case 0x58 /* 'X' */ :
+		case 0x59 /* 'Y' */ :
+		case 0x5a /* 'Z' */ :
 		{
-			matchRange(static_cast<unsigned char>('A'),static_cast<unsigned char>('Z'));
+			matchRange('A','Z');
 			break;
 		}
 		default:
 		{
-			throw ScannerException(std::string("no viable alt for char: ")+charName(LA(1)),getLine());
+			throw ANTLR_USE_NAMESPACE(antlr)NoViableAltForCharException(LA(1), getFilename(), getLine(), getColumn());
 		}
 		}
 		}
-		{
-		do {
+		{ // ( ... )*
+		for (;;) {
 			switch ( LA(1)) {
-			case static_cast<unsigned char>('_'):
+			case 0x5f /* '_' */ :
 			{
-				match(static_cast<unsigned char>('_'));
+				match('_' /* charlit */ );
 				break;
 			}
-			case static_cast<unsigned char>('a'):
-			case static_cast<unsigned char>('b'):
-			case static_cast<unsigned char>('c'):
-			case static_cast<unsigned char>('d'):
-			case static_cast<unsigned char>('e'):
-			case static_cast<unsigned char>('f'):
-			case static_cast<unsigned char>('g'):
-			case static_cast<unsigned char>('h'):
-			case static_cast<unsigned char>('i'):
-			case static_cast<unsigned char>('j'):
-			case static_cast<unsigned char>('k'):
-			case static_cast<unsigned char>('l'):
-			case static_cast<unsigned char>('m'):
-			case static_cast<unsigned char>('n'):
-			case static_cast<unsigned char>('o'):
-			case static_cast<unsigned char>('p'):
-			case static_cast<unsigned char>('q'):
-			case static_cast<unsigned char>('r'):
-			case static_cast<unsigned char>('s'):
-			case static_cast<unsigned char>('t'):
-			case static_cast<unsigned char>('u'):
-			case static_cast<unsigned char>('v'):
-			case static_cast<unsigned char>('w'):
-			case static_cast<unsigned char>('x'):
-			case static_cast<unsigned char>('y'):
-			case static_cast<unsigned char>('z'):
+			case 0x61 /* 'a' */ :
+			case 0x62 /* 'b' */ :
+			case 0x63 /* 'c' */ :
+			case 0x64 /* 'd' */ :
+			case 0x65 /* 'e' */ :
+			case 0x66 /* 'f' */ :
+			case 0x67 /* 'g' */ :
+			case 0x68 /* 'h' */ :
+			case 0x69 /* 'i' */ :
+			case 0x6a /* 'j' */ :
+			case 0x6b /* 'k' */ :
+			case 0x6c /* 'l' */ :
+			case 0x6d /* 'm' */ :
+			case 0x6e /* 'n' */ :
+			case 0x6f /* 'o' */ :
+			case 0x70 /* 'p' */ :
+			case 0x71 /* 'q' */ :
+			case 0x72 /* 'r' */ :
+			case 0x73 /* 's' */ :
+			case 0x74 /* 't' */ :
+			case 0x75 /* 'u' */ :
+			case 0x76 /* 'v' */ :
+			case 0x77 /* 'w' */ :
+			case 0x78 /* 'x' */ :
+			case 0x79 /* 'y' */ :
+			case 0x7a /* 'z' */ :
 			{
-				matchRange(static_cast<unsigned char>('a'),static_cast<unsigned char>('z'));
+				matchRange('a','z');
 				break;
 			}
-			case static_cast<unsigned char>('A'):
-			case static_cast<unsigned char>('B'):
-			case static_cast<unsigned char>('C'):
-			case static_cast<unsigned char>('D'):
-			case static_cast<unsigned char>('E'):
-			case static_cast<unsigned char>('F'):
-			case static_cast<unsigned char>('G'):
-			case static_cast<unsigned char>('H'):
-			case static_cast<unsigned char>('I'):
-			case static_cast<unsigned char>('J'):
-			case static_cast<unsigned char>('K'):
-			case static_cast<unsigned char>('L'):
-			case static_cast<unsigned char>('M'):
-			case static_cast<unsigned char>('N'):
-			case static_cast<unsigned char>('O'):
-			case static_cast<unsigned char>('P'):
-			case static_cast<unsigned char>('Q'):
-			case static_cast<unsigned char>('R'):
-			case static_cast<unsigned char>('S'):
-			case static_cast<unsigned char>('T'):
-			case static_cast<unsigned char>('U'):
-			case static_cast<unsigned char>('V'):
-			case static_cast<unsigned char>('W'):
-			case static_cast<unsigned char>('X'):
-			case static_cast<unsigned char>('Y'):
-			case static_cast<unsigned char>('Z'):
+			case 0x41 /* 'A' */ :
+			case 0x42 /* 'B' */ :
+			case 0x43 /* 'C' */ :
+			case 0x44 /* 'D' */ :
+			case 0x45 /* 'E' */ :
+			case 0x46 /* 'F' */ :
+			case 0x47 /* 'G' */ :
+			case 0x48 /* 'H' */ :
+			case 0x49 /* 'I' */ :
+			case 0x4a /* 'J' */ :
+			case 0x4b /* 'K' */ :
+			case 0x4c /* 'L' */ :
+			case 0x4d /* 'M' */ :
+			case 0x4e /* 'N' */ :
+			case 0x4f /* 'O' */ :
+			case 0x50 /* 'P' */ :
+			case 0x51 /* 'Q' */ :
+			case 0x52 /* 'R' */ :
+			case 0x53 /* 'S' */ :
+			case 0x54 /* 'T' */ :
+			case 0x55 /* 'U' */ :
+			case 0x56 /* 'V' */ :
+			case 0x57 /* 'W' */ :
+			case 0x58 /* 'X' */ :
+			case 0x59 /* 'Y' */ :
+			case 0x5a /* 'Z' */ :
 			{
-				matchRange(static_cast<unsigned char>('A'),static_cast<unsigned char>('Z'));
+				matchRange('A','Z');
 				break;
 			}
-			case static_cast<unsigned char>('0'):
-			case static_cast<unsigned char>('1'):
-			case static_cast<unsigned char>('2'):
-			case static_cast<unsigned char>('3'):
-			case static_cast<unsigned char>('4'):
-			case static_cast<unsigned char>('5'):
-			case static_cast<unsigned char>('6'):
-			case static_cast<unsigned char>('7'):
-			case static_cast<unsigned char>('8'):
-			case static_cast<unsigned char>('9'):
+			case 0x30 /* '0' */ :
+			case 0x31 /* '1' */ :
+			case 0x32 /* '2' */ :
+			case 0x33 /* '3' */ :
+			case 0x34 /* '4' */ :
+			case 0x35 /* '5' */ :
+			case 0x36 /* '6' */ :
+			case 0x37 /* '7' */ :
+			case 0x38 /* '8' */ :
+			case 0x39 /* '9' */ :
 			{
-				matchRange(static_cast<unsigned char>('0'),static_cast<unsigned char>('9'));
+				matchRange('0','9');
 				break;
 			}
 			default:
@@ -1992,46 +1800,71 @@ void GrpLexer::mAT_IDENT(bool _createToken) {
 				goto _loop516;
 			}
 			}
-		} while (true);
-		_loop516:;
 		}
+		_loop516:;
+		} // ( ... )*
 	}
 	else {
-		{
-		do {
-			if (((LA(1) >= static_cast<unsigned char>('0') && LA(1) <= static_cast<unsigned char>('9')))) {
-				matchRange(static_cast<unsigned char>('0'),static_cast<unsigned char>('9'));
+		{ // ( ... )*
+		for (;;) {
+			if (((LA(1) >= 0x30 /* '0' */  && LA(1) <= 0x39 /* '9' */ ))) {
+				matchRange('0','9');
 			}
 			else {
 				goto _loop518;
 			}
 			
-		} while (true);
-		_loop518:;
 		}
+		_loop518:;
+		} // ( ... )*
 	}
 	
 	}
-	if ( _createToken && _token==nullToken && _ttype!=Token::SKIP ) {
+	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
 	   _token->setText(text.substr(_begin, text.length()-_begin));
 	}
 	_returnToken = _token;
+	_saveIndex=0;
 }
 
 
 const unsigned long GrpLexer::_tokenSet_0_data_[] = { 0UL, 0UL, 134217726UL, 134217726UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL };
-const BitSet GrpLexer::_tokenSet_0(_tokenSet_0_data_,10);
+// A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h 
+// i j k l m n o p q 
+const ANTLR_USE_NAMESPACE(antlr)BitSet GrpLexer::_tokenSet_0(_tokenSet_0_data_,10);
 const unsigned long GrpLexer::_tokenSet_1_data_[] = { 4294958079UL, 4294967295UL, 4294967295UL, 4294967295UL, 4294967295UL, 4294967295UL, 4294967295UL, 4294967295UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL };
-const BitSet GrpLexer::_tokenSet_1(_tokenSet_1_data_,16);
+// 0x0 0x1 0x2 0x3 0x4 0x5 0x6 0x7 0x8 0x9 0xb 0xc 0xe 0xf 0x10 0x11 0x12 
+// 0x13 0x14 0x15 0x16 0x17 0x18 0x19 0x1a 0x1b 0x1c 0x1d 0x1e 0x1f   ! 
+// \" # $ % & \' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 : ; < = > ? @ A B 
+// C D E F G H I J K L M N O P Q R S T U V W X Y Z [ 0x5c ] ^ _ ` a b c 
+// d e f g h i j k l m n o p q 
+const ANTLR_USE_NAMESPACE(antlr)BitSet GrpLexer::_tokenSet_1(_tokenSet_1_data_,16);
 const unsigned long GrpLexer::_tokenSet_2_data_[] = { 4294966271UL, 4294966271UL, 4294967295UL, 4294967295UL, 4294967295UL, 4294967295UL, 4294967295UL, 4294967295UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL };
-const BitSet GrpLexer::_tokenSet_2(_tokenSet_2_data_,16);
+// 0x0 0x1 0x2 0x3 0x4 0x5 0x6 0x7 0x8 0x9 0xb 0xc 0xd 0xe 0xf 0x10 0x11 
+// 0x12 0x13 0x14 0x15 0x16 0x17 0x18 0x19 0x1a 0x1b 0x1c 0x1d 0x1e 0x1f 
+//   ! \" # $ % & \' ( ) + , - . / 0 1 2 3 4 5 6 7 8 9 : ; < = > ? @ A 
+// B C D E F G H I J K L M N O P Q R S T U V W X Y Z [ 0x5c ] ^ _ ` a b 
+// c d e f g h i j k l m n o p q 
+const ANTLR_USE_NAMESPACE(antlr)BitSet GrpLexer::_tokenSet_2(_tokenSet_2_data_,16);
 const unsigned long GrpLexer::_tokenSet_3_data_[] = { 0UL, 67043328UL, 126UL, 126UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL };
-const BitSet GrpLexer::_tokenSet_3(_tokenSet_3_data_,10);
+// 0 1 2 3 4 5 6 7 8 9 A B C D E F a b c d e f 
+const ANTLR_USE_NAMESPACE(antlr)BitSet GrpLexer::_tokenSet_3(_tokenSet_3_data_,10);
 const unsigned long GrpLexer::_tokenSet_4_data_[] = { 0UL, 132UL, 268435456UL, 1327172UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL };
-const BitSet GrpLexer::_tokenSet_4(_tokenSet_4_data_,10);
+// \" \' 0x5c b f n 
+const ANTLR_USE_NAMESPACE(antlr)BitSet GrpLexer::_tokenSet_4(_tokenSet_4_data_,10);
 const unsigned long GrpLexer::_tokenSet_5_data_[] = { 4294967295UL, 4294967167UL, 4294967295UL, 4294967295UL, 4294574079UL, 4294967295UL, 4294967295UL, 4294967295UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL };
-const BitSet GrpLexer::_tokenSet_5(_tokenSet_5_data_,16);
+// 0x0 0x1 0x2 0x3 0x4 0x5 0x6 0x7 0x8 0x9 0xa 0xb 0xc 0xd 0xe 0xf 0x10 
+// 0x11 0x12 0x13 0x14 0x15 0x16 0x17 0x18 0x19 0x1a 0x1b 0x1c 0x1d 0x1e 
+// 0x1f   ! \" # $ % & ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 : ; < = > ? 
+// @ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z [ 0x5c ] ^ _ ` 
+// a b c d e f g h i j k l m n o p q 
+const ANTLR_USE_NAMESPACE(antlr)BitSet GrpLexer::_tokenSet_5(_tokenSet_5_data_,16);
 const unsigned long GrpLexer::_tokenSet_6_data_[] = { 4294967295UL, 4294967291UL, 4294967295UL, 4294967295UL, 4293394431UL, 4294967295UL, 4294967295UL, 4294967295UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL };
-const BitSet GrpLexer::_tokenSet_6(_tokenSet_6_data_,16);
+// 0x0 0x1 0x2 0x3 0x4 0x5 0x6 0x7 0x8 0x9 0xa 0xb 0xc 0xd 0xe 0xf 0x10 
+// 0x11 0x12 0x13 0x14 0x15 0x16 0x17 0x18 0x19 0x1a 0x1b 0x1c 0x1d 0x1e 
+// 0x1f   ! # $ % & \' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 : ; < = > ? 
+// @ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z [ 0x5c ] ^ _ ` 
+// a b c d e f g h i j k l m n o p q 
+const ANTLR_USE_NAMESPACE(antlr)BitSet GrpLexer::_tokenSet_6(_tokenSet_6_data_,16);
 

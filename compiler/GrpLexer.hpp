@@ -1,26 +1,23 @@
 #ifndef INC_GrpLexer_hpp_
 #define INC_GrpLexer_hpp_
 
-#include "Antlr/config.hpp"
-/*
- * ANTLR-generated file resulting from grammar c:\graphite1\grcompiler\compiler\grpparser.g
- * 
- * Terence Parr, MageLang Institute
- * with John Lilley, Empathy Software
- * ANTLR Version 2.6.0; 1996-1999
- */
-
-#include "Antlr/CommonToken.hpp"
-#include "Antlr/InputBuffer.hpp"
-#include "Antlr/BitSet.hpp"
-#include "Antlr/CharScanner.hpp"
+#include <antlr/config.hpp>
+/* $ANTLR 2.7.7 (20170711): "GrpParser.g" -> "GrpLexer.hpp"$ */
+#include <antlr/CommonToken.hpp>
+#include <antlr/InputBuffer.hpp>
+#include <antlr/BitSet.hpp>
+#include "GrpParserTokenTypes.hpp"
+#include <antlr/CharScanner.hpp>
+#line 38 "GrpParser.g"
 
 //	Header stuff here
 void AddGlobalError(bool, int nID, std::string, int nLine);
 class GrpTokenStreamFilter;
 
-class GrpLexer : public CharScanner
- {
+#line 18 "GrpLexer.hpp"
+class CUSTOM_API GrpLexer : public ANTLR_USE_NAMESPACE(antlr)CharScanner, public GrpParserTokenTypes
+{
+#line 922 "GrpParser.g"
 
 //	Customized code:
 public:
@@ -44,15 +41,19 @@ public:
 		return makeToken(t);
 	}
 
+#line 22 "GrpLexer.hpp"
 private:
 	void initLiterals();
 public:
-	bool getCaseSensitiveLiterals() const;
+	bool getCaseSensitiveLiterals() const
+	{
+		return false;
+	}
 public:
-	GrpLexer(std::istream& in);
-	GrpLexer(InputBuffer& ib);
-	GrpLexer(const LexerSharedInputState& state);
-	RefToken nextToken();
+	GrpLexer(ANTLR_USE_NAMESPACE(std)istream& in);
+	GrpLexer(ANTLR_USE_NAMESPACE(antlr)InputBuffer& ib);
+	GrpLexer(const ANTLR_USE_NAMESPACE(antlr)LexerSharedInputState& state);
+	ANTLR_USE_NAMESPACE(antlr)RefToken nextToken();
 	public: void mWS(bool _createToken);
 	public: void mCOMMENT_SL(bool _createToken);
 	public: void mCOMMENT_ML(bool _createToken);
@@ -111,19 +112,19 @@ public:
 private:
 	
 	static const unsigned long _tokenSet_0_data_[];
-	static const BitSet _tokenSet_0;
+	static const ANTLR_USE_NAMESPACE(antlr)BitSet _tokenSet_0;
 	static const unsigned long _tokenSet_1_data_[];
-	static const BitSet _tokenSet_1;
+	static const ANTLR_USE_NAMESPACE(antlr)BitSet _tokenSet_1;
 	static const unsigned long _tokenSet_2_data_[];
-	static const BitSet _tokenSet_2;
+	static const ANTLR_USE_NAMESPACE(antlr)BitSet _tokenSet_2;
 	static const unsigned long _tokenSet_3_data_[];
-	static const BitSet _tokenSet_3;
+	static const ANTLR_USE_NAMESPACE(antlr)BitSet _tokenSet_3;
 	static const unsigned long _tokenSet_4_data_[];
-	static const BitSet _tokenSet_4;
+	static const ANTLR_USE_NAMESPACE(antlr)BitSet _tokenSet_4;
 	static const unsigned long _tokenSet_5_data_[];
-	static const BitSet _tokenSet_5;
+	static const ANTLR_USE_NAMESPACE(antlr)BitSet _tokenSet_5;
 	static const unsigned long _tokenSet_6_data_[];
-	static const BitSet _tokenSet_6;
+	static const ANTLR_USE_NAMESPACE(antlr)BitSet _tokenSet_6;
 };
 
 #endif /*INC_GrpLexer_hpp_*/

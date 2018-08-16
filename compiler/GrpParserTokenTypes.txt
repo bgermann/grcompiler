@@ -1,3 +1,4 @@
+// $ANTLR 2.7.7 (20170711): GrpParser.g -> GrpParserTokenTypes.txt$
 GrpParser    // output token vocab name
 OP_EQ=4
 OP_PLUSEQUAL=5
