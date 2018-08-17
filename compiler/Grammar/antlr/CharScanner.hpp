@@ -9,7 +9,9 @@
  */
 
 #include <antlr/config.hpp>
-#include <strings.h>
+
+#include <cstdio>
+#include <cstring>
 #include <map>
 
 #ifdef HAS_NOT_CCTYPE_H
