@@ -23,7 +23,7 @@ void GrpLexer::init(GrpTokenStreamFilter & tsf)
 	setTokenObjectFactory(&GrpToken::factory);
 }
 
-void GrpLexer::reportError(const ScannerException& ex)
+void GrpLexer::reportError(const antlr::ANTLRException& ex)
 {
 	//	Pipe the error through the token stream filter, to handle the
 	//	line-and-file adjustments.
@@ -429,7 +429,7 @@ void GrpLexer::mWS(bool _createToken) {
 	}
 	}
 #line 965 "GrpParser.g"
-	_ttype = Token::SKIP;
+	_ttype = antlr::Token::SKIP;
 #line 434 "GrpLexer.cpp"
 	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
@@ -460,7 +460,7 @@ void GrpLexer::mCOMMENT_SL(bool _createToken) {
 	_loop435:;
 	} // ( ... )*
 #line 973 "GrpParser.g"
-	_ttype = Token::SKIP;
+	_ttype = antlr::Token::SKIP;
 #line 465 "GrpLexer.cpp"
 	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);
@@ -501,7 +501,7 @@ void GrpLexer::mCOMMENT_ML(bool _createToken) {
 	} // ( ... )*
 	match("*/");
 #line 982 "GrpParser.g"
-	_ttype = Token::SKIP;
+	_ttype = antlr::Token::SKIP;
 #line 506 "GrpLexer.cpp"
 	if ( _createToken && _token==ANTLR_USE_NAMESPACE(antlr)nullToken && _ttype!=ANTLR_USE_NAMESPACE(antlr)Token::SKIP ) {
 	   _token = makeToken(_ttype);

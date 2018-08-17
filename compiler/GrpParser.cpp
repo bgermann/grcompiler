@@ -14,10 +14,10 @@
 void GrpParser::init(GrpTokenStreamFilter & tsf)
 {
 	m_ptsf = &tsf;
-	setASTNodeFactory(&GrpASTNode::factory);
+	setASTNodeFactory(new GrpASTNode());
 }
 
-void GrpParser::reportError(const ParserException& ex)
+void GrpParser::reportError(const antlr::RecognitionException& ex)
 {
 	//	Pipe the error back through the token stream filter, so it can supply the
 	//	line-and-file information.

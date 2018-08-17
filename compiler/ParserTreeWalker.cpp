@@ -430,7 +430,7 @@ bool GrcManager::ParseFile(std::ifstream & strmIn, std::string staFileName)
 		parser.init(tsf);
 
 		parser.renderDescription();
-		RefAST ast = parser.getAST();
+		antlr::RefAST ast = parser.getAST();
 
 		if (g_errorList.AnyFatalErrors())
 		{
@@ -468,7 +468,7 @@ void GrcManager::InitPreDefined()
 /*----------------------------------------------------------------------------------------------
 	Walk the parse tree to extract the data and fill in the GdlRenderer.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkParseTree(RefAST ast)
+void GrcManager::WalkParseTree(antlr::RefAST ast)
 {
 	if (ast == NULL)
 	{
@@ -493,26 +493,26 @@ int temp = ast->getType();
 /*----------------------------------------------------------------------------------------------
 	Process the entire parse tree.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkTopTree(RefAST ast)
+void GrcManager::WalkTopTree(antlr::RefAST ast)
 {
 	Assert(ast->getType() == Ztop);
 	Assert(ast->getNextSibling() == NULL);
 
-	RefAST astChild = ast->getFirstChild();
+	antlr::RefAST astChild = ast->getFirstChild();
 
 	while (astChild)
 	{
 		int nodetyp = astChild->getType();
 		switch (nodetyp)
 		{
-		case LITERAL_environment:
+		case GrpParserTokenTypes::LITERAL_environment:
 			WalkEnvTree(astChild, ktbltNone, NULL, NULL);
 			break;
-		case LITERAL_table:
+		case GrpParserTokenTypes::LITERAL_table:
 			WalkTableTree(astChild);
 			break;
-		case OP_EQ:
-		case OP_PLUSEQUAL:
+		case GrpParserTokenTypes::OP_EQ:
+		case GrpParserTokenTypes::OP_PLUSEQUAL:
 			ProcessGlobalSetting(astChild);
 			break;
 		default:
@@ -527,11 +527,11 @@ void GrcManager::WalkTopTree(RefAST ast)
 	Process a global setting statement.
 	Review: should we also allow directives?
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::ProcessGlobalSetting(RefAST ast)
+void GrcManager::ProcessGlobalSetting(antlr::RefAST ast)
 {
 	Assert(ast->getType() == OP_EQ || ast->getType() == OP_PLUSEQUAL);
 
-	RefAST astName = ast->getFirstChild();
+	antlr::RefAST astName = ast->getFirstChild();
 	Assert(astName);
 	std::string staName = astName->getText();
 
@@ -545,7 +545,7 @@ void GrcManager::ProcessGlobalSetting(RefAST ast)
 		return;
 	}
 
-	RefAST astValue = astName->getNextSibling();
+	antlr::RefAST astValue = astName->getNextSibling();
 	Assert(astValue);
 
 	if (staName == "AutoPseudo")
@@ -558,11 +558,11 @@ void GrcManager::ProcessGlobalSetting(RefAST ast)
 			return;
 		}
 
-		if (astValue->getType() == LITERAL_true)
+		if (astValue->getType() == GrpParserTokenTypes::LITERAL_true)
 			m_prndr->SetAutoPseudo(true);
-		else if (astValue->getType() == LITERAL_false)
+		else if (astValue->getType() == GrpParserTokenTypes::LITERAL_false)
 			m_prndr->SetAutoPseudo(false);
-		else if (astValue->getType() == LIT_INT)
+		else if (astValue->getType() == GrpParserTokenTypes::LIT_INT)
 		{
 			int nValue;
 			bool fM;
@@ -591,11 +591,11 @@ void GrcManager::ProcessGlobalSetting(RefAST ast)
 			return;
 		}
 
-		if (astValue->getType() == LITERAL_true)
+		if (astValue->getType() == GrpParserTokenTypes::LITERAL_true)
 			m_prndr->SetBidi(1);
-		else if (astValue->getType() == LITERAL_false)
+		else if (astValue->getType() == GrpParserTokenTypes::LITERAL_false)
 			m_prndr->SetBidi(0);
-		else if (astValue->getType() == LIT_INT)
+		else if (astValue->getType() == GrpParserTokenTypes::LIT_INT)
 		{
 			int nValue;
 			bool fM;
@@ -637,7 +637,7 @@ void GrcManager::ProcessGlobalSetting(RefAST ast)
 			(fDescent) ? m_prndr->SetExtraDescent(NULL) : m_prndr->SetExtraAscent(NULL);
 			pexpOld = NULL;
 		}
-		if (astValue->getType() != LIT_INT)
+		if (astValue->getType() != GrpParserTokenTypes::LIT_INT)
 		{
 			g_errorList.AddError(1124, NULL,
 				"Invalid value for ", staName, " global",
@@ -693,7 +693,7 @@ void GrcManager::ProcessGlobalSetting(RefAST ast)
 
 		while (astValue)
 		{
-			if (astValue->getType() == LIT_INT || astValue->getType() == OP_PLUS)
+			if (astValue->getType() == GrpParserTokenTypes::LIT_INT || astValue->getType() == GrpParserTokenTypes::OP_PLUS)
 			{
 				int nValue;
 				GdlExpression * pexp = WalkExpressionTree(astValue);
@@ -728,7 +728,7 @@ void GrcManager::ProcessGlobalSetting(RefAST ast)
 
 		while (astValue)
 		{
-			if (astValue->getType() != LIT_STRING)
+			if (astValue->getType() != GrpParserTokenTypes::LIT_STRING)
 			{
 				g_errorList.AddError(1130, NULL,
 					"The ScriptTags global expects a string value",
@@ -785,16 +785,16 @@ void GrcManager::ProcessGlobalSetting(RefAST ast)
 /*----------------------------------------------------------------------------------------------
 	Process an "environment" statement.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkEnvTree(RefAST ast, TableType tblt,
+void GrcManager::WalkEnvTree(antlr::RefAST ast, TableType tblt,
 	GdlRuleTable * prultbl, GdlPass * ppass)
 {
-	Assert(ast->getType() == LITERAL_environment);
+	Assert(ast->getType() == GrpParserTokenTypes::LITERAL_environment);
 
 	GrpLineAndFile lnf = LineAndFile(ast);
 	PushGeneralEnv(lnf);
 
-	RefAST astDirectives = ast->getFirstChild();
-	RefAST astContents = astDirectives;
+	antlr::RefAST astDirectives = ast->getFirstChild();
+	antlr::RefAST astContents = astDirectives;
 	if (astDirectives && astDirectives->getType() == Zdirectives)
 	{
 		WalkDirectivesTree(astDirectives);
@@ -827,25 +827,25 @@ void GrcManager::WalkEnvTree(RefAST ast, TableType tblt,
 	pnAutoKern
 	pnCollisionThreshold
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkDirectivesTree(RefAST ast, int * pnCollisionFix, int * pnAutoKern,
+void GrcManager::WalkDirectivesTree(antlr::RefAST ast, int * pnCollisionFix, int * pnAutoKern,
 	int * pnCollisionThreshold, int * pnDir)
 {
 	Assert(ast->getType() == Zdirectives);
 
-	RefAST astDirective = ast->getFirstChild();
+	antlr::RefAST astDirective = ast->getFirstChild();
 	while (astDirective)
 	{
 		std::string staName = astDirective->getFirstChild()->getText();
 		//	For now, all directives have numeric or boolean values.
-		RefAST astValue = astDirective->getFirstChild()->getNextSibling();
+		antlr::RefAST astValue = astDirective->getFirstChild()->getNextSibling();
 		Assert(astValue);
 		int nValue = -1;
 		bool fM = false;
-		if (astValue->getType() == LIT_INT)
+		if (astValue->getType() == GrpParserTokenTypes::LIT_INT)
 			nValue = NumericValue(astValue, &fM);
-		else if (astValue->getType() == LITERAL_false)
+		else if (astValue->getType() == GrpParserTokenTypes::LITERAL_false)
 			nValue = 0;
-		else if (astValue->getType() == LITERAL_true)
+		else if (astValue->getType() == GrpParserTokenTypes::LITERAL_true)
 			nValue = 1;
 		else
 		{
@@ -901,7 +901,7 @@ void GrcManager::WalkDirectivesTree(RefAST ast, int * pnCollisionFix, int * pnAu
 						LineAndFile(ast));
 				else
 				{
-					if (astValue->getType() == LITERAL_true)
+					if (astValue->getType() == GrpParserTokenTypes::LITERAL_true)
 						*pnCollisionFix = 3;	// default; should this be 1??
 					else if (nValue > kMaxColIterations || nValue < 0)
 					{
@@ -965,36 +965,36 @@ void GrcManager::WalkDirectivesTree(RefAST ast, int * pnCollisionFix, int * pnAu
 /*----------------------------------------------------------------------------------------------
 	Process a "table" statement.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkTableTree(RefAST ast)
+void GrcManager::WalkTableTree(antlr::RefAST ast)
 {
-	Assert(ast->getType() == LITERAL_table);
+	Assert(ast->getType() == GrpParserTokenTypes::LITERAL_table);
 
-	RefAST astTableType = ast->getFirstChild();
+	antlr::RefAST astTableType = ast->getFirstChild();
 	Assert(astTableType);
 
 	int nodetyp = astTableType->getType();
 	switch (nodetyp)
 	{
-	case LITERAL_glyph:
+	case GrpParserTokenTypes::LITERAL_glyph:
 		WalkGlyphTableTree(ast);
 		break;
-	case LITERAL_feature:
+	case GrpParserTokenTypes::LITERAL_feature:
 		WalkFeatureTableTree(ast);
 		break;
-	case LITERAL_language:
+	case GrpParserTokenTypes::LITERAL_language:
 		WalkLanguageTableTree(ast);
 		break;
-	case LITERAL_name:
+	case GrpParserTokenTypes::LITERAL_name:
 		WalkNameTableTree(ast);
 		break;
-	case LITERAL_substitution:
-	case LITERAL_linebreak:
-	case LITERAL_position:
-	case LITERAL_positioning:
-	case LITERAL_justification:
+	case GrpParserTokenTypes::LITERAL_substitution:
+	case GrpParserTokenTypes::LITERAL_linebreak:
+	case GrpParserTokenTypes::LITERAL_position:
+	case GrpParserTokenTypes::LITERAL_positioning:
+	case GrpParserTokenTypes::LITERAL_justification:
 		WalkRuleTableTree(ast, nodetyp);
 		break;
-	case IDENT:
+	case GrpParserTokenTypes::IDENT:
 		g_errorList.AddWarning(1509, NULL,
 			"Skipping '",
 			astTableType->getText().c_str(),
@@ -1010,32 +1010,32 @@ void GrcManager::WalkTableTree(RefAST ast)
 	Process an element of a table: a -pass-, -table-, -if-. or -environment- statement,
 	assignment, or rule.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkTableElement(RefAST ast, TableType tblt,
+void GrcManager::WalkTableElement(antlr::RefAST ast, TableType tblt,
 	GdlRuleTable * prultbl, GdlPass * ppass)
 {
 	int nodetyp = ast->getType();
 	switch (nodetyp)
 	{
-	case LITERAL_environment:
+	case GrpParserTokenTypes::LITERAL_environment:
 		WalkEnvTree(ast, tblt, prultbl, ppass);
 		break;
-	case LITERAL_table:
+	case GrpParserTokenTypes::LITERAL_table:
 		WalkTableTree(ast);
 		break;
-	case Zdirectives:
+	case GrpParserTokenTypes::Zdirectives:
 		WalkDirectivesTree(ast);
 		break;
-	case LITERAL_pass:
+	case GrpParserTokenTypes::LITERAL_pass:
 		Assert(prultbl);
 		Assert(ktbltRule == tblt);
 		WalkPassTree(ast, prultbl, ppass);
 		break;
-	case ZifStruct:
+	case GrpParserTokenTypes::ZifStruct:
 		Assert(prultbl);
 		Assert(ktbltRule == tblt);
 		WalkIfTree(ast, prultbl, ppass);
 		break;
-	case Zrule:
+	case GrpParserTokenTypes::Zrule:
 		Assert(prultbl);
 		Assert(ktbltRule == tblt);
 		WalkRuleTree(ast, prultbl, ppass);
@@ -1066,12 +1066,12 @@ void GrcManager::WalkTableElement(RefAST ast, TableType tblt,
 /*----------------------------------------------------------------------------------------------
 	Process the glyph table.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkGlyphTableTree(RefAST ast)
+void GrcManager::WalkGlyphTableTree(antlr::RefAST ast)
 {
-	Assert(ast->getType() == LITERAL_table);
-	Assert(ast->getFirstChild()->getType() == LITERAL_glyph);
+	Assert(ast->getType() == GrpParserTokenTypes::LITERAL_table);
+	Assert(ast->getFirstChild()->getType() == GrpParserTokenTypes::LITERAL_glyph);
 
-	RefAST astContents = ast->getFirstChild()->getNextSibling();
+	antlr::RefAST astContents = ast->getFirstChild()->getNextSibling();
 	while (astContents)
 	{
 		int nodetyp = astContents->getType();
@@ -1095,7 +1095,7 @@ void GrcManager::WalkGlyphTableTree(RefAST ast)
 /*----------------------------------------------------------------------------------------------
 	Process a top-level glyph table element.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkGlyphTableElement(RefAST ast)
+void GrcManager::WalkGlyphTableElement(antlr::RefAST ast)
 {
 	int nodetyp = ast->getType();
 	Assert(nodetyp == OP_EQ || nodetyp == OP_PLUSEQUAL
@@ -1176,10 +1176,10 @@ void GrcManager::WalkGlyphTableElement(RefAST ast)
 /*----------------------------------------------------------------------------------------------
 	Process a single glyph class definition.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkGlyphClassTree(RefAST ast, GdlGlyphClassDefn * pglfc, GlyphClassType glfct)
+void GrcManager::WalkGlyphClassTree(antlr::RefAST ast, GdlGlyphClassDefn * pglfc, GlyphClassType glfct)
 {
 	//	Skip the class name.
-	RefAST astContents = ast->getFirstChild()->getNextSibling();
+	antlr::RefAST astContents = ast->getFirstChild()->getNextSibling();
 	while (astContents)
 	{
 		if (astContents->getType() == Zattrs)
@@ -1187,7 +1187,7 @@ void GrcManager::WalkGlyphClassTree(RefAST ast, GdlGlyphClassDefn * pglfc, Glyph
 			//	Attributes.
 			std::vector<std::string> vsta;
 			vsta.push_back(pglfc->Name());
-			RefAST astT = astContents->getFirstChild();
+			antlr::RefAST astT = astContents->getFirstChild();
 			while (astT)
 			{
 				WalkGlyphAttrTree(astT, vsta);
@@ -1207,12 +1207,12 @@ void GrcManager::WalkGlyphClassTree(RefAST ast, GdlGlyphClassDefn * pglfc, Glyph
 	Traverse the glyph attribute assignment tree, adding the assignments to the symbol table
 	and master glyph attribute table.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkGlyphAttrTree(RefAST ast, std::vector<std::string> & vsta)
+void GrcManager::WalkGlyphAttrTree(antlr::RefAST ast, std::vector<std::string> & vsta)
 {
 	if (!ast)
 		return;
 
-	RefAST astNextID = ast->getFirstChild();
+	antlr::RefAST astNextID = ast->getFirstChild();
 	vsta.push_back(astNextID->getText());
 
 	int nodetyp = ast->getType();
@@ -1231,7 +1231,7 @@ void GrcManager::WalkGlyphAttrTree(RefAST ast, std::vector<std::string> & vsta)
 		}
 		else
 		{
-			RefAST astValue = astNextID->getNextSibling();
+			antlr::RefAST astValue = astNextID->getNextSibling();
 			if (astValue->getType() == Zfunction)
 				ProcessFunction(astValue, vsta, false);
 			else
@@ -1312,7 +1312,7 @@ void GrcManager::WalkGlyphAttrTree(RefAST ast, std::vector<std::string> & vsta)
 	{
 		//	Dot or brace.
 		Assert(ast->getType() == OP_DOT || ast->getType() == ZdotStruct);
-		RefAST astT = astNextID->getNextSibling();
+		antlr::RefAST astT = astNextID->getNextSibling();
 		while (astT)
 		{
 			WalkGlyphAttrTree(astT, vsta);
@@ -1326,7 +1326,7 @@ void GrcManager::WalkGlyphAttrTree(RefAST ast, std::vector<std::string> & vsta)
 /*----------------------------------------------------------------------------------------------
 	Add the expression as the value of the glyph attribute indicated by the strings.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::AddGlyphAttr(RefAST ast, std::vector<std::string> & vsta, GdlExpression * pexpValue)
+void GrcManager::AddGlyphAttr(antlr::RefAST ast, std::vector<std::string> & vsta, GdlExpression * pexpValue)
 {
 	Symbol psym = SymbolTable()->AddGlyphAttrSymbol(GrcStructName(vsta),
 		LineAndFile(ast), pexpValue->ExpType());
@@ -1343,13 +1343,13 @@ void GrcManager::AddGlyphAttr(RefAST ast, std::vector<std::string> & vsta, GdlEx
 		fSlotAttr			- true if this is a slot attribute, false if it is a glyph attr
 		prit, psymOp		- only used for slot attributes
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::ProcessFunction(RefAST ast, std::vector<std::string> & vsta,
+void GrcManager::ProcessFunction(antlr::RefAST ast, std::vector<std::string> & vsta,
 	bool fSlotAttr, GdlRuleItem * prit, Symbol psymOp)
 {
 	Assert(ast->getType() == Zfunction);
 	Assert(!fSlotAttr || (prit && psymOp));
 
-	RefAST astName = ast->getFirstChild();
+	antlr::RefAST astName = ast->getFirstChild();
 	std::string staName = astName->getText();
 
 	int nPR = PointRadius();
@@ -1357,10 +1357,10 @@ void GrcManager::ProcessFunction(RefAST ast, std::vector<std::string> & vsta,
 	bool fOverride = AttrOverride();
 	GrpLineAndFile lnf = LineAndFile(ast);
 
-	RefAST astX1;
-	RefAST astX2;
-	RefAST astX3;
-	RefAST astX4;
+	antlr::RefAST astX1;
+	antlr::RefAST astX2;
+	antlr::RefAST astX3;
+	antlr::RefAST astX4;
 
 	GdlExpression * pexp1 = NULL;
 	GdlExpression * pexp2 = NULL;
@@ -1622,13 +1622,13 @@ void GrcManager::BadFunctionError(GrpLineAndFile & lnf, std::string staFunction,
 		pglfRet			- value to return to embed inside of pseudo;
 								one or the other of these arguments will be NULL
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::ProcessGlyphClassMember(RefAST ast, GdlGlyphClassDefn * pglfc,
+void GrcManager::ProcessGlyphClassMember(antlr::RefAST ast, GdlGlyphClassDefn * pglfc,
 	GlyphClassType glfct, GdlGlyphDefn ** ppglfRet)
 {
 	Assert(!pglfc || !ppglfRet);
 	Assert(pglfc || ppglfRet);
 
-	RefAST astItem;
+	antlr::RefAST astItem;
 	int nCodePage;
 	int nPseudoInput;
 	GlyphType glft = kglftUnknown;
@@ -1643,23 +1643,23 @@ void GrcManager::ProcessGlyphClassMember(RefAST ast, GdlGlyphClassDefn * pglfc,
 	int nodetyp = ast->getType();
 	switch (nodetyp)
 	{
-	case LITERAL_unicode:		glft = kglftUnicode; break;
-	case ZuHex:					glft = kglftUnicode; break;
-	case LITERAL_glyphid:		glft = kglftGlyphID; break;
-	case LITERAL_codepoint:		glft = kglftCodepoint; break;
-	case LITERAL_postscript:	glft = kglftPostscript; break;
-	case LITERAL_pseudo:		glft = kglftPseudo; break;
-	case IDENT:					break;
+	case GrpParserTokenTypes::LITERAL_unicode:		glft = kglftUnicode; break;
+	case GrpParserTokenTypes::ZuHex:			glft = kglftUnicode; break;
+	case GrpParserTokenTypes::LITERAL_glyphid:		glft = kglftGlyphID; break;
+	case GrpParserTokenTypes::LITERAL_codepoint:		glft = kglftCodepoint; break;
+	case GrpParserTokenTypes::LITERAL_postscript:	glft = kglftPostscript; break;
+	case GrpParserTokenTypes::LITERAL_pseudo:		glft = kglftPseudo; break;
+	case GrpParserTokenTypes::IDENT:					break;
 	default:
 		Assert(false);
 	}
 
 	switch (nodetyp)
 	{
-	case LITERAL_unicode:
-	case ZuHex:
-	case LITERAL_glyphid:
-	case LITERAL_postscript:
+	case GrpParserTokenTypes::LITERAL_unicode:
+	case GrpParserTokenTypes::ZuHex:
+	case GrpParserTokenTypes::LITERAL_glyphid:
+	case GrpParserTokenTypes::LITERAL_postscript:
 		astItem = ast->getFirstChild();
 		Assert(astItem->getType() != Zcodepage);
 		while (astItem)
@@ -1682,11 +1682,11 @@ void GrcManager::ProcessGlyphClassMember(RefAST ast, GdlGlyphClassDefn * pglfc,
 		}
 		break;
 
-	case LITERAL_codepoint:
+	case GrpParserTokenTypes::LITERAL_codepoint:
 		astItem = ast->getFirstChild();
 		if (astItem->getType() == Zcodepage)
 		{
-			Assert(astItem->getFirstChild()->getType() == LIT_INT);
+			Assert(astItem->getFirstChild()->getType() == GrpParserTokenTypes::LIT_INT);
 			nCodePage = NumericValue(astItem->getFirstChild());
 			astItem = astItem->getNextSibling();
 		}
@@ -1714,7 +1714,7 @@ void GrcManager::ProcessGlyphClassMember(RefAST ast, GdlGlyphClassDefn * pglfc,
 
 		break;
 
-	case LITERAL_pseudo:
+	case GrpParserTokenTypes::LITERAL_pseudo:
 		Assert(pglfc && !ppglfRet);	// can't put a pseudo inside a pseudo
 
 		astItem = ast->getFirstChild();
@@ -1722,7 +1722,7 @@ void GrcManager::ProcessGlyphClassMember(RefAST ast, GdlGlyphClassDefn * pglfc,
 
 		if (astItem->getNextSibling())
 		{
-			RefAST astInput = astItem->getNextSibling();
+			antlr::RefAST astInput = astItem->getNextSibling();
 			nPseudoInput = NumericValue(astInput);
 			pglfT = new GdlGlyphDefn(kglftPseudo, pglfForPseudo, nPseudoInput);
 		}
@@ -1770,10 +1770,10 @@ void GrcManager::ProcessGlyphClassMember(RefAST ast, GdlGlyphClassDefn * pglfc,
 	Process the contents of a glyph function ("unicode", "glyphid", etc); return the
 	resulting glyph.
 ----------------------------------------------------------------------------------------------*/
-GdlGlyphDefn * GrcManager::ProcessGlyph(RefAST astGlyph, GlyphType glft, int nCodePage)
+GdlGlyphDefn * GrcManager::ProcessGlyph(antlr::RefAST astGlyph, GlyphType glft, int nCodePage)
 {
-	RefAST ast1;
-	RefAST ast2;
+	antlr::RefAST ast1;
+	antlr::RefAST ast2;
 
 	int n1 = 0, n2 = 0;
 	utf16 w1;
@@ -1792,18 +1792,18 @@ GdlGlyphDefn * GrcManager::ProcessGlyph(RefAST astGlyph, GlyphType glft, int nCo
 		ast2 = ast1->getNextSibling();
 		Assert(ast2);
 		Assert(!ast2->getNextSibling());
-		if (ast1->getType() == LIT_INT || ast1->getType() == LIT_UHEX)
+		if (ast1->getType() == GrpParserTokenTypes::LIT_INT || ast1->getType() == GrpParserTokenTypes::LIT_UHEX)
 			n1 = NumericValue(ast1);
-		else if (ast1->getType() == LIT_CHAR)
+		else if (ast1->getType() == GrpParserTokenTypes::LIT_CHAR)
 			n1 = *(ast1->getText().c_str());
 		else
 		{
 			Assert(false);
 		}
 
-		if (ast2->getType() == LIT_INT || ast1->getType() == LIT_UHEX)
+		if (ast2->getType() == GrpParserTokenTypes::LIT_INT || ast1->getType() == GrpParserTokenTypes::LIT_UHEX)
 			n2 = NumericValue(ast2);
-		else if (ast2->getType() == LIT_CHAR)
+		else if (ast2->getType() == GrpParserTokenTypes::LIT_CHAR)
 			n2 = *(ast2->getText().c_str());
 		else
 		{
@@ -1816,22 +1816,22 @@ GdlGlyphDefn * GrcManager::ProcessGlyph(RefAST astGlyph, GlyphType glft, int nCo
 
 		break;
 
-	case LIT_INT:
-	case LIT_UHEX:
+	case GrpParserTokenTypes::LIT_INT:
+	case GrpParserTokenTypes::LIT_UHEX:
 		n1 = NumericValue(astGlyph);
 		pglfRet = (nCodePage == -1) ?
 			new GdlGlyphDefn(glft, n1) :
 			new GdlGlyphDefn(glft, n1, nCodePage);
 		break;
 
-	case LIT_CHAR:
+	case GrpParserTokenTypes::LIT_CHAR:
 		w1 = (astGlyph->getText())[0];
 		pglfRet = (nCodePage == -1) ?
 			new GdlGlyphDefn(glft, w1) :
 			new GdlGlyphDefn(glft, w1, nCodePage);
 		break;
 
-	case LIT_STRING:
+	case GrpParserTokenTypes::LIT_STRING:
 		sta = astGlyph->getText();
 		pglfRet = (nCodePage == -1) ?
 			new GdlGlyphDefn(glft, sta) :
@@ -1850,12 +1850,12 @@ GdlGlyphDefn * GrcManager::ProcessGlyph(RefAST astGlyph, GlyphType glft, int nCo
 /*----------------------------------------------------------------------------------------------
 	Process the feature table.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkFeatureTableTree(RefAST ast)
+void GrcManager::WalkFeatureTableTree(antlr::RefAST ast)
 {
-	Assert(ast->getType() == LITERAL_table);
-	Assert(ast->getFirstChild()->getType() == LITERAL_feature);
+	Assert(ast->getType() == GrpParserTokenTypes::LITERAL_table);
+	Assert(ast->getFirstChild()->getType() == GrpParserTokenTypes::LITERAL_feature);
 
-	RefAST astContents = ast->getFirstChild()->getNextSibling();
+	antlr::RefAST astContents = ast->getFirstChild()->getNextSibling();
 	while (astContents)
 	{
 		int nodetyp = astContents->getType();
@@ -1878,7 +1878,7 @@ void GrcManager::WalkFeatureTableTree(RefAST ast)
 /*----------------------------------------------------------------------------------------------
 	Process a top level element in the feature table.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkFeatureTableElement(RefAST ast)
+void GrcManager::WalkFeatureTableElement(antlr::RefAST ast)
 {
 	std::vector<std::string> vsta;
 	std::string staFeatureName = ast->getFirstChild()->getText();
@@ -1917,9 +1917,9 @@ void GrcManager::WalkFeatureTableElement(RefAST ast)
 	Traverse the features identifier tree, adding the assignments to the symbol table
 	and master features table.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkFeatureSettingsTree(RefAST ast, std::vector<std::string> & vsta)
+void GrcManager::WalkFeatureSettingsTree(antlr::RefAST ast, std::vector<std::string> & vsta)
 {
-	RefAST astNextID = ast->getFirstChild();
+	antlr::RefAST astNextID = ast->getFirstChild();
 	vsta.push_back(astNextID->getText());
 
 	if (ast->getType() == OP_EQ)
@@ -1935,7 +1935,7 @@ void GrcManager::WalkFeatureSettingsTree(RefAST ast, std::vector<std::string> & 
 		Symbol psym = SymbolTable()->AddSymbol(GrcStructName(vsta), ksymtFeatSetting,
 			LineAndFile(ast));
 
-		RefAST astValue = astNextID->getNextSibling();
+		antlr::RefAST astValue = astNextID->getNextSibling();
 		if (!astValue)
 			return;
 
@@ -1959,7 +1959,7 @@ void GrcManager::WalkFeatureSettingsTree(RefAST ast, std::vector<std::string> & 
 	else
 	{
 		Assert(ast->getType() == OP_DOT || ast->getType() == ZdotStruct);
-		RefAST astT = astNextID->getNextSibling();
+		antlr::RefAST astT = astNextID->getNextSibling();
 		while (astT)
 		{
 			WalkFeatureSettingsTree(astT, vsta);
@@ -1973,12 +1973,12 @@ void GrcManager::WalkFeatureSettingsTree(RefAST ast, std::vector<std::string> & 
 /*----------------------------------------------------------------------------------------------
 	Process the language table.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkLanguageTableTree(RefAST ast)
+void GrcManager::WalkLanguageTableTree(antlr::RefAST ast)
 {
-	Assert(ast->getType() == LITERAL_table);
-	Assert(ast->getFirstChild()->getType() == LITERAL_language);
+	Assert(ast->getType() == GrpParserTokenTypes::LITERAL_table);
+	Assert(ast->getFirstChild()->getType() == GrpParserTokenTypes::LITERAL_language);
 
-	RefAST astContents = ast->getFirstChild()->getNextSibling();
+	antlr::RefAST astContents = ast->getFirstChild()->getNextSibling();
 	while (astContents)
 	{
 		int nodetyp = astContents->getType();
@@ -2000,12 +2000,12 @@ void GrcManager::WalkLanguageTableTree(RefAST ast)
 /*----------------------------------------------------------------------------------------------
 	Process a top level element in the language table.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkLanguageTableElement(RefAST ast)
+void GrcManager::WalkLanguageTableElement(antlr::RefAST ast)
 {
-	RefAST astLabel = ast->getFirstChild();
+	antlr::RefAST astLabel = ast->getFirstChild();
 	std::string staLabel(astLabel->getText().c_str());
 
-	RefAST astItem = astLabel->getNextSibling();
+	antlr::RefAST astItem = astLabel->getNextSibling();
 
 	// Find or create the language class with that name:
 	GdlLangClass * plcls;
@@ -2030,14 +2030,14 @@ void GrcManager::WalkLanguageTableElement(RefAST ast)
 /*----------------------------------------------------------------------------------------------
 	Process one assignment in the language table.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkLanguageItem(RefAST ast, GdlLangClass * plcls)
+void GrcManager::WalkLanguageItem(antlr::RefAST ast, GdlLangClass * plcls)
 {
-	RefAST astItem = ast;
+	antlr::RefAST astItem = ast;
 	while (astItem)
 	{
 		Assert(astItem->getType() == OP_EQ);
 
-		RefAST astLhs = astItem->getFirstChild();
+		antlr::RefAST astLhs = astItem->getFirstChild();
 		std::string staLhs = astLhs->getText();
 		if (staLhs == "language" || staLhs == "languages")
 		{
@@ -2048,12 +2048,12 @@ void GrcManager::WalkLanguageItem(RefAST ast, GdlLangClass * plcls)
 					LineAndFile(astLhs));
 			}
 
-			RefAST astLangList = astLhs->getNextSibling();
+			antlr::RefAST astLangList = astLhs->getNextSibling();
 			WalkLanguageCodeList(astLangList, plcls);
 		}
 		else // feature setting
 		{
-			RefAST astValue = astLhs->getNextSibling();
+			antlr::RefAST astValue = astLhs->getNextSibling();
 			std::string staValue = astValue->getText();
 			GdlExpression * pexpVal = NULL;
 			if (astValue->getType() != IDENT)
@@ -2068,10 +2068,10 @@ void GrcManager::WalkLanguageItem(RefAST ast, GdlLangClass * plcls)
 /*----------------------------------------------------------------------------------------------
 	Process one line in the language table.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkLanguageCodeList(RefAST astList, GdlLangClass * plcls)
+void GrcManager::WalkLanguageCodeList(antlr::RefAST astList, GdlLangClass * plcls)
 {
-	RefAST astNext = astList;
-	while (astNext && astNext->getType() == LIT_STRING)
+	antlr::RefAST astNext = astList;
+	while (astNext && astNext->getType() == GrpParserTokenTypes::LIT_STRING)
 	{
 		std::string staLang = astNext->getText();
 		if (staLang.length() > 4)
@@ -2097,12 +2097,12 @@ void GrcManager::WalkLanguageCodeList(RefAST astList, GdlLangClass * plcls)
 /*----------------------------------------------------------------------------------------------
 	Process the name table.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkNameTableTree(RefAST ast)
+void GrcManager::WalkNameTableTree(antlr::RefAST ast)
 {
-	Assert(ast->getType() == LITERAL_table);
-	Assert(ast->getFirstChild()->getType() == LITERAL_name);
+	Assert(ast->getType() == GrpParserTokenTypes::LITERAL_table);
+	Assert(ast->getFirstChild()->getType() == GrpParserTokenTypes::LITERAL_name);
 
-	RefAST astContents = ast->getFirstChild()->getNextSibling();
+	antlr::RefAST astContents = ast->getFirstChild()->getNextSibling();
 	while (astContents)
 	{
 		int nodetyp = astContents->getType();
@@ -2125,7 +2125,7 @@ void GrcManager::WalkNameTableTree(RefAST ast)
 /*----------------------------------------------------------------------------------------------
 	Process a top-level name table entry.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkNameTableElement(RefAST ast)
+void GrcManager::WalkNameTableElement(antlr::RefAST ast)
 {
 	//	Nothing special to do.
 	std::vector<std::string> vsta;
@@ -2136,9 +2136,9 @@ void GrcManager::WalkNameTableElement(RefAST ast)
 /*----------------------------------------------------------------------------------------------
 	Process a name assignment.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkNameIDTree(RefAST ast, std::vector<std::string> & vsta)
+void GrcManager::WalkNameIDTree(antlr::RefAST ast, std::vector<std::string> & vsta)
 {
-	RefAST astNextID = ast->getFirstChild();
+	antlr::RefAST astNextID = ast->getFirstChild();
 	vsta.push_back(astNextID->getText());
 
 	if (ast->getType() == OP_EQ || ast->getType() == OP_PLUSEQUAL)
@@ -2146,7 +2146,7 @@ void GrcManager::WalkNameIDTree(RefAST ast, std::vector<std::string> & vsta)
 		Symbol psym = SymbolTable()->AddSymbol(GrcStructName(vsta), ksymtNameID,
 			LineAndFile(ast));
 
-		RefAST astValue = astNextID->getNextSibling();
+		antlr::RefAST astValue = astNextID->getNextSibling();
 		GdlExpression *pexpValue;
 		pexpValue = WalkExpressionTree(astValue);
 		m_mvlNameStrings->AddItem(psym, pexpValue,
@@ -2156,7 +2156,7 @@ void GrcManager::WalkNameIDTree(RefAST ast, std::vector<std::string> & vsta)
 	else
 	{
 		Assert(ast->getType() == OP_DOT || ast->getType() == ZdotStruct);
-		RefAST astT = astNextID->getNextSibling();
+		antlr::RefAST astT = astNextID->getNextSibling();
 		while (astT)
 		{
 			WalkNameIDTree(astT, vsta);
@@ -2170,27 +2170,27 @@ void GrcManager::WalkNameIDTree(RefAST ast, std::vector<std::string> & vsta)
 /*----------------------------------------------------------------------------------------------
 	Process a table that includes rules (substitution, positioning, linebreak).
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkRuleTableTree(RefAST ast, int nodetyp)
+void GrcManager::WalkRuleTableTree(antlr::RefAST ast, int nodetyp)
 {
 	GrpLineAndFile lnf = LineAndFile(ast);
 
-	if (nodetyp == LITERAL_substitution)
+	if (nodetyp == GrpParserTokenTypes::LITERAL_substitution)
 		PushTableEnv(lnf, "substitution");
-	else if (nodetyp == LITERAL_linebreak)
+	else if (nodetyp == GrpParserTokenTypes::LITERAL_linebreak)
 		PushTableEnv(lnf, "linebreak");
-	else if (nodetyp == LITERAL_position)
+	else if (nodetyp == GrpParserTokenTypes::LITERAL_position)
 		PushTableEnv(lnf, "positioning");
-	else if (nodetyp == LITERAL_positioning)
+	else if (nodetyp == GrpParserTokenTypes::LITERAL_positioning)
 		PushTableEnv(lnf, "positioning");
-	else if (nodetyp == LITERAL_justification)
+	else if (nodetyp == GrpParserTokenTypes::LITERAL_justification)
 		PushTableEnv(lnf, "justification");
 	else
 	{
 		Assert(false);
 	}
 
-	RefAST astDirectives = ast->getFirstChild()->getNextSibling();
-	RefAST astContents = astDirectives;
+	antlr::RefAST astDirectives = ast->getFirstChild()->getNextSibling();
+	antlr::RefAST astContents = astDirectives;
 	if (astDirectives && astDirectives->getType() == Zdirectives)
 	{
 		WalkDirectivesTree(astDirectives);
@@ -2198,7 +2198,7 @@ void GrcManager::WalkRuleTableTree(RefAST ast, int nodetyp)
 	}
 
 	GdlRuleTable * prultbl = RuleTable(lnf);
-	if (nodetyp == LITERAL_substitution || nodetyp == LITERAL_justification)
+	if (nodetyp == GrpParserTokenTypes::LITERAL_substitution || nodetyp == GrpParserTokenTypes::LITERAL_justification)
 		prultbl->SetSubstitution(true);
 	GdlPass * ppass = prultbl->GetPass(lnf, Pass(), MaxRuleLoop(), MaxBackup());
 
@@ -2214,10 +2214,10 @@ void GrcManager::WalkRuleTableTree(RefAST ast, int nodetyp)
 /*----------------------------------------------------------------------------------------------
 	Process a "pass" statement and its contents.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkPassTree(RefAST ast, GdlRuleTable * prultbl, GdlPass * /*ppassPrev*/)
+void GrcManager::WalkPassTree(antlr::RefAST ast, GdlRuleTable * prultbl, GdlPass * /*ppassPrev*/)
 {
-	RefAST astPassNumber = ast->getFirstChild();
-	Assert(astPassNumber->getType() == LIT_INT);
+	antlr::RefAST astPassNumber = ast->getFirstChild();
+	Assert(astPassNumber->getType() == GrpParserTokenTypes::LIT_INT);
 	bool fM;
 	int nPassNumber = NumericValue(astPassNumber, &fM);
 	if (fM)
@@ -2228,8 +2228,8 @@ void GrcManager::WalkPassTree(RefAST ast, GdlRuleTable * prultbl, GdlPass * /*pp
 	GrpLineAndFile lnf = LineAndFile(ast);
 	PushPassEnv(lnf, nPassNumber);
 
-	RefAST astDirectives = ast->getFirstChild()->getNextSibling();
-	RefAST astContents = astDirectives;
+	antlr::RefAST astDirectives = ast->getFirstChild()->getNextSibling();
+	antlr::RefAST astContents = astDirectives;
 	int nCollisionFix = 0;
 	int nAutoKern = 0;
 	int nCollisionThreshold = 0;
@@ -2322,7 +2322,7 @@ void GrcManager::WalkPassTree(RefAST ast, GdlRuleTable * prultbl, GdlPass * /*pp
 /*----------------------------------------------------------------------------------------------
 	Process an "if" statement.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkIfTree(RefAST ast, GdlRuleTable * prultbl, GdlPass * ppass)
+void GrcManager::WalkIfTree(antlr::RefAST ast, GdlRuleTable * prultbl, GdlPass * ppass)
 {
 	Assert(ast->getType() == ZifStruct);
 	int cConds = 0;
@@ -2340,10 +2340,10 @@ void GrcManager::WalkIfTree(RefAST ast, GdlRuleTable * prultbl, GdlPass * ppass)
 	Symbol psymNot = SymbolTable()->FindSymbol("!");
 	Assert(psymNot);
 
-	RefAST astCond;
+	antlr::RefAST astCond;
 	GdlExpression * pexpCond = NULL;
 
-	RefAST astNext = ast->getFirstChild();
+	antlr::RefAST astNext = ast->getFirstChild();
 	while (astNext)
 	{
 		if (pexpCond)
@@ -2362,7 +2362,7 @@ void GrcManager::WalkIfTree(RefAST ast, GdlRuleTable * prultbl, GdlPass * ppass)
 			}
 		}
 
-		RefAST astContents = astNext->getFirstChild();
+		antlr::RefAST astContents = astNext->getFirstChild();
 
 		int nodetyp = astNext->getType();
 		switch (nodetyp)
@@ -2375,7 +2375,7 @@ void GrcManager::WalkIfTree(RefAST ast, GdlRuleTable * prultbl, GdlPass * ppass)
 			break;
 		case LITERAL_else:
 			Assert(!astNext->getNextSibling());
-			astCond = RefAST(NULL);
+			astCond = antlr::RefAST(NULL);
 			break;
 		default:
 			Assert(false);
@@ -2427,15 +2427,15 @@ void GrcManager::WalkIfTree(RefAST ast, GdlRuleTable * prultbl, GdlPass * ppass)
 	Return true if all the direct children of the -if- structure are pass structures.
 	If there is a mixture, return false and give a warning.
 ----------------------------------------------------------------------------------------------*/
-bool GrcManager::AllContentsArePasses(RefAST ast)
+bool GrcManager::AllContentsArePasses(antlr::RefAST ast)
 {
 	bool fOne = false;
 	bool fAll = true;
 
-	RefAST astNext = ast->getFirstChild();
+	antlr::RefAST astNext = ast->getFirstChild();
 	while (astNext)
 	{
-		RefAST astContents = astNext->getFirstChild();
+		antlr::RefAST astContents = astNext->getFirstChild();
 		int nodetyp = astNext->getType();
 		switch (nodetyp)
 		{
@@ -2475,22 +2475,22 @@ bool GrcManager::AllContentsArePasses(RefAST ast)
 /*----------------------------------------------------------------------------------------------
 	Process a rule.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkRuleTree(RefAST ast, GdlRuleTable * prultbl, GdlPass * ppass)
+void GrcManager::WalkRuleTree(antlr::RefAST ast, GdlRuleTable * prultbl, GdlPass * ppass)
 {
 	GrpLineAndFile lnf = LineAndFile(ast);
 
 	GdlRule * prule = ppass->NewRule(lnf);
 
-	RefAST astLhs = ast->getFirstChild();
+	antlr::RefAST astLhs = ast->getFirstChild();
 	Assert(astLhs);
 	if (!astLhs)
 		return;
-	RefAST astRhs;
-	RefAST astContext;
+	antlr::RefAST astRhs;
+	antlr::RefAST astContext;
 	if (astLhs->getType() == Zrhs)
 	{
 		astRhs = astLhs;
-		astLhs = RefAST(NULL);
+		astLhs = antlr::RefAST(NULL);
 	}
 	else
 	{
@@ -2500,7 +2500,7 @@ void GrcManager::WalkRuleTree(RefAST ast, GdlRuleTable * prultbl, GdlPass * ppas
 		{
 			//	Substitution rule with no lhs: make what is labeled Zlhs be the rhs.
 			astRhs = astLhs;
-			astLhs = RefAST(NULL);
+			astLhs = antlr::RefAST(NULL);
 		}
 		else
 		{
@@ -2512,7 +2512,7 @@ void GrcManager::WalkRuleTree(RefAST ast, GdlRuleTable * prultbl, GdlPass * ppas
 
 	//	Process the context first, then the RHS, then the LHS.
 
-	RefAST astItem;
+	antlr::RefAST astItem;
 
 	int irit = 0;
 	if (astContext)
@@ -2563,14 +2563,14 @@ void GrcManager::WalkRuleTree(RefAST ast, GdlRuleTable * prultbl, GdlPass * ppas
 /*----------------------------------------------------------------------------------------------
 	Process a rule item or optional range.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::ProcessItemRange(RefAST astItem, GdlRuleTable * prultbl, GdlPass * ppass,
+void GrcManager::ProcessItemRange(antlr::RefAST astItem, GdlRuleTable * prultbl, GdlPass * ppass,
 	GdlRule * prule, int * pirit, int lrc, bool fHasLhs)
 {
 	if (astItem->getType() == OP_QUESTION)
 	{
 		//	Optional range.
 		int iritStart = *pirit;
-		RefAST astSubItem = astItem->getFirstChild();
+		antlr::RefAST astSubItem = astItem->getFirstChild();
 		while (astSubItem)
 		{
 			ProcessItemRange(astSubItem, prultbl, ppass, prule, pirit, lrc, fHasLhs);
@@ -2601,18 +2601,18 @@ void GrcManager::ProcessItemRange(RefAST astItem, GdlRuleTable * prultbl, GdlPas
 		fHasLhs		- if we are in the rhs, and there is in fact a lhs (irrelevant
 						if we are not in the rhs)
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::ProcessRuleItem(RefAST astItem, GdlRuleTable * prultbl, GdlPass * /*ppass*/,
+void GrcManager::ProcessRuleItem(antlr::RefAST astItem, GdlRuleTable * prultbl, GdlPass * /*ppass*/,
 	GdlRule * prule, int * pirit, int lrc, bool fHasLhs)
 {
 	GrpLineAndFile lnf = LineAndFile(astItem);
 
 	Assert(astItem->getType() == ZruleItem);
 
-	RefAST astNext = astItem->getFirstChild();
+	antlr::RefAST astNext = astItem->getFirstChild();
 
-	RefAST astSel = RefAST(NULL);
-	RefAST astSelValue = RefAST(NULL);
-	RefAST astClass = RefAST(NULL);
+	antlr::RefAST astSel = RefAST(NULL);
+	antlr::RefAST astSelValue = RefAST(NULL);
+	antlr::RefAST astClass = RefAST(NULL);
 	bool fSel = false;
 	// bool fAssocs = false;
 	GdlAlias aliasSel;
@@ -2755,7 +2755,7 @@ void GrcManager::ProcessRuleItem(RefAST astItem, GdlRuleTable * prultbl, GdlPass
 			if (lrc == 0) // context--constraint
 			{
 				Assert(astNext->getType() == Zconstraint);
-				RefAST astConstraint = astNext->getFirstChild();
+				antlr::RefAST astConstraint = astNext->getFirstChild();
 				if (astConstraint)
 				{
 					Assert(!astConstraint->getNextSibling());
@@ -2773,7 +2773,7 @@ void GrcManager::ProcessRuleItem(RefAST astItem, GdlRuleTable * prultbl, GdlPass
 				Assert(lrc == 1);
 				Assert(astNext->getType() == Zattrs);
 				std::vector<std::string> vsta;
-				RefAST astAttr = astNext->getFirstChild();
+				antlr::RefAST astAttr = astNext->getFirstChild();
 				while (astAttr)
 				{
 					WalkSlotAttrTree(astAttr, prit, vsta);
@@ -2790,7 +2790,7 @@ void GrcManager::ProcessRuleItem(RefAST astItem, GdlRuleTable * prultbl, GdlPass
 /*----------------------------------------------------------------------------------------------
 	Create a new class corresponding to an anonymous class in a rule. Return its name.
 ----------------------------------------------------------------------------------------------*/
-std::string GrcManager::ProcessClassList(RefAST ast, RefAST * pastNext)
+std::string GrcManager::ProcessClassList(antlr::RefAST ast, RefAST * pastNext)
 {
 	if (ast->getType() == IDENT)
 	{
@@ -2816,7 +2816,7 @@ std::string GrcManager::ProcessClassList(RefAST ast, RefAST * pastNext)
 	m_prndr->AddGlyphClass(pglfc);
 
 	int nodetyp;
-	RefAST astGlyph = ast;
+	antlr::RefAST astGlyph = ast;
 	while (astGlyph &&
 		((nodetyp = astGlyph->getType()) == IDENT ||
 			nodetyp == LITERAL_glyphid ||
@@ -2834,7 +2834,7 @@ std::string GrcManager::ProcessClassList(RefAST ast, RefAST * pastNext)
 /*----------------------------------------------------------------------------------------------
 	Create a new class corresponding to an anonymous class in a rule. Return its name.
 ----------------------------------------------------------------------------------------------*/
-std::string GrcManager::ProcessAnonymousClass(RefAST ast, RefAST * pastNext)
+std::string GrcManager::ProcessAnonymousClass(antlr::RefAST ast, RefAST * pastNext)
 {
 	Symbol psymClass = SymbolTable()->AddAnonymousClassSymbol(LineAndFile(ast));
 
@@ -2846,7 +2846,7 @@ std::string GrcManager::ProcessAnonymousClass(RefAST ast, RefAST * pastNext)
 
 	//	Note that there might possibly be a chain of glyphs, not just a single one.
 	int nodetyp;
-	RefAST astGlyph = ast;
+	antlr::RefAST astGlyph = ast;
 	while (astGlyph &&
 		((nodetyp = astGlyph->getType()) == LITERAL_glyphid ||
 			nodetyp == LITERAL_unicode || nodetyp == LITERAL_codepoint || nodetyp == ZuHex ||
@@ -2931,7 +2931,7 @@ GdlGlyphClassDefn * GrcManager::ConvertClassToDifference(Symbol psymClass,
 	Process a node that is a slot reference, either an identifer or a number. Fill in the
 	given GdlAlias with the result.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::ProcessSlotIndicator(RefAST ast, GdlAlias * palias)
+void GrcManager::ProcessSlotIndicator(antlr::RefAST ast, GdlAlias * palias)
 {
 	if (ast->getType() == LIT_INT)
 	{
@@ -2956,7 +2956,7 @@ void GrcManager::ProcessSlotIndicator(RefAST ast, GdlAlias * palias)
 /*----------------------------------------------------------------------------------------------
 	Process a list of associations.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::ProcessAssociations(RefAST ast, GdlRuleTable *prultbl, GdlRuleItem * prit,
+void GrcManager::ProcessAssociations(antlr::RefAST ast, GdlRuleTable *prultbl, GdlRuleItem * prit,
 	int lrc)
 {
 	GrpLineAndFile lnf = LineAndFile(ast);
@@ -2980,7 +2980,7 @@ void GrcManager::ProcessAssociations(RefAST ast, GdlRuleTable *prultbl, GdlRuleI
 		GdlSubstitutionItem * pritsub =	dynamic_cast<GdlSubstitutionItem *>(prit);
 		if (pritsub)
 		{
-			RefAST astAssoc = ast->getFirstChild();
+			antlr::RefAST astAssoc = ast->getFirstChild();
 			while (astAssoc)
 			{
 				GdlAlias aliasAssoc;
@@ -3004,12 +3004,12 @@ void GrcManager::ProcessAssociations(RefAST ast, GdlRuleTable *prultbl, GdlRuleI
 	Traverse the slot attribute assignment tree, adding the assignments to the rule item.
 	This will also handle feature assignments.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::WalkSlotAttrTree(RefAST ast, GdlRuleItem * prit, std::vector<std::string> & vsta)
+void GrcManager::WalkSlotAttrTree(antlr::RefAST ast, GdlRuleItem * prit, std::vector<std::string> & vsta)
 {
 	if (!ast)
 		return;
 
-	RefAST astNextID = ast->getFirstChild();
+	antlr::RefAST astNextID = ast->getFirstChild();
 	vsta.push_back(astNextID->getText().c_str());
 
 	int nodetyp = ast->getType();
@@ -3039,7 +3039,7 @@ void GrcManager::WalkSlotAttrTree(RefAST ast, GdlRuleItem * prit, std::vector<st
 		}
 		else
 		{
-			RefAST astValue = astNextID->getNextSibling();
+			antlr::RefAST astValue = astNextID->getNextSibling();
 			if (astValue->getType() == Zfunction)
 			{
 				ProcessFunction(astValue, vsta, true, prit, psymOp);
@@ -3057,7 +3057,7 @@ void GrcManager::WalkSlotAttrTree(RefAST ast, GdlRuleItem * prit, std::vector<st
 	else
 	{
 		Assert(ast->getType() == OP_DOT || ast->getType() == ZdotStruct);
-		RefAST astT = astNextID->getNextSibling();
+		antlr::RefAST astT = astNextID->getNextSibling();
 		while (astT)
 		{
 			WalkSlotAttrTree(astT, prit, vsta);
@@ -3071,7 +3071,7 @@ void GrcManager::WalkSlotAttrTree(RefAST ast, GdlRuleItem * prit, std::vector<st
 /*----------------------------------------------------------------------------------------------
 	Process an expression.
 ----------------------------------------------------------------------------------------------*/
-GdlExpression * GrcManager::WalkExpressionTree(RefAST ast)
+GdlExpression * GrcManager::WalkExpressionTree(antlr::RefAST ast)
 {
 	GdlExpression * pexpRet = NULL;
 	GdlExpression * pexp1 = NULL;
@@ -3082,16 +3082,16 @@ GdlExpression * GrcManager::WalkExpressionTree(RefAST ast)
 	Symbol psymOp;
 	Symbol psymName;
 
-	RefAST astOperand1;
-	RefAST astOperand2;
-	RefAST astOperand3;
-	RefAST astT;
-	RefAST astCond;
-	RefAST astSel;
-	RefAST astName;
-	RefAST astCluster;
-	RefAST astText;
-	RefAST astCodePage;
+	antlr::RefAST astOperand1;
+	antlr::RefAST astOperand2;
+	antlr::RefAST astOperand3;
+	antlr::RefAST astT;
+	antlr::RefAST astCond;
+	antlr::RefAST astSel;
+	antlr::RefAST astName;
+	antlr::RefAST astCluster;
+	antlr::RefAST astText;
+	antlr::RefAST astCodePage;
 
 	int nValue;
 	int nCluster;
@@ -3344,7 +3344,7 @@ GdlExpression * GrcManager::WalkExpressionTree(RefAST ast)
 /*----------------------------------------------------------------------------------------------
 	Return the line information the tree node is associated with.
 ----------------------------------------------------------------------------------------------*/
-GrpLineAndFile GrcManager::LineAndFile(RefAST ast)
+GrpLineAndFile GrcManager::LineAndFile(antlr::RefAST ast)
 {
 	GrpASTNode * wrNode = dynamic_cast<GrpASTNode *>(ast->getNode());
 	Assert(wrNode);
@@ -3375,7 +3375,7 @@ GrpLineAndFile GrcManager::LineAndFile(RefAST ast)
 		U+89ab
 	Return 0 if the value is not a legal numeric string.
 ----------------------------------------------------------------------------------------------*/
-int GrcManager::NumericValue(RefAST ast, bool * pfM)
+int GrcManager::NumericValue(antlr::RefAST ast, bool * pfM)
 {
 	Assert(ast->getType() == LIT_INT || ast->getType() == LIT_UHEX);
 
@@ -3423,7 +3423,7 @@ int GrcManager::NumericValue(RefAST ast, bool * pfM)
 	return nRet;
 }
 
-int GrcManager::NumericValue(RefAST ast)
+int GrcManager::NumericValue(antlr::RefAST ast)
 {
 	bool fM;
 	int nRet = NumericValue(ast, &fM);
@@ -3437,12 +3437,12 @@ int GrcManager::NumericValue(RefAST ast)
 	is indicated by the boolean	flag, which tells that we want to treat the attribute name 
 	as a glyph attribute, not a	slot attribute.
 ----------------------------------------------------------------------------------------------*/
-Symbol GrcManager::IdentifierSymbol(RefAST ast, std::vector<std::string> & vsta,
+Symbol GrcManager::IdentifierSymbol(antlr::RefAST ast, std::vector<std::string> & vsta,
 		bool * pfGlyphAttr)
 {
 	if (ast->getType() == OP_DOT)
 	{
-		RefAST ast1 = ast->getFirstChild();
+		antlr::RefAST ast1 = ast->getFirstChild();
 		if (vsta.size() == 0 && strcmp(ast1->getText().c_str(), "glyph") == 0)
 			*pfGlyphAttr = true;	// treat as glyph attribute
 		else
@@ -3667,7 +3667,7 @@ void GdlRule::ConvertLhsOptRangesToContext()
 /*----------------------------------------------------------------------------------------------
 	Write a text version of the parse tree to a file.
 ----------------------------------------------------------------------------------------------*/
-void GrcManager::DebugParseTree(RefAST ast)
+void GrcManager::DebugParseTree(antlr::RefAST ast)
 {
 	std::ofstream strmOut;
 	strmOut.open("dbg_parsetree.txt");

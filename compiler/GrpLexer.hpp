@@ -26,7 +26,7 @@ public:
 	GrpTokenStreamFilter * m_ptsf;
 	void init(GrpTokenStreamFilter & tsf);
 
-	void reportError(const ScannerException& ex);
+	void reportError(const antlr::ANTLRException& ex);
 
 	void reportError(const std::string& s)
 	{
@@ -36,7 +36,7 @@ public:
 	{
 		AddGlobalError(false, 505, s.c_str(), 0);
 	}
-	RefToken publicMakeToken(int t)
+	antlr::RefToken publicMakeToken(int t)
 	{
 		return makeToken(t);
 	}

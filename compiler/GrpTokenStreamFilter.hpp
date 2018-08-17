@@ -18,15 +18,15 @@ Description:
 
 class GrpLexer;
 
-class GrpTokenStreamFilter : public TokenStream
+class GrpTokenStreamFilter : public antlr::TokenStream
 {
 public:
-	virtual RefToken nextToken();
+	virtual antlr::RefToken nextToken();
 
 	GrpTokenStreamFilter(GrpLexer & lexer)
 		: m_lexer(&lexer)
 	{
-		m_tokPeek = RefToken(NULL);
+		m_tokPeek = antlr::RefToken(NULL);
 	}
 
 	void init(std::string sta)
@@ -38,8 +38,8 @@ public:
 		m_nPrevLineOffset = 0;
 	}
 
-	void ReportLexerError(const ScannerException & ex);
-	void ReportParserError(const ParserException & ex);
+	void ReportLexerError(const antlr::ANTLRException & ex);
+	void ReportParserError(const antlr::RecognitionException & ex);
 
 protected:
 	GrpLexer * m_lexer;
@@ -49,14 +49,14 @@ protected:
 	int m_nLineOffset;
 
 	//	For error messages. The current approach assumes that a syntax error does not span
-	//	more than two files. We pass ParserExceptions back to this class; if the line number
+	//	more than two files. We pass RecognitionExceptions back to this class; if the line number
 	//	is less than the previous marker, we use the previous line-offset-and-file information;
 	//	otherwise we use the current line-offset-and-file.
 	int m_nLastLineMarker;
 	std::string m_staPrevFile;
 	int m_nPrevLineOffset;
 
-	RefToken m_tokPeek;	// to peek for -if- following -else-
+	antlr::RefToken m_tokPeek;	// to peek for -if- following -else-
 };
 
 

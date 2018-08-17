@@ -31,11 +31,10 @@ using namespace gr;
 #include "UtilString.h"
 
 #include "antlr/AST.hpp"
+#include "antlr/ASTFactory.hpp"
 #include "antlr/CommonToken.hpp"
-#include "antlr/CommonASTNode.hpp"
 #include "antlr/TokenStream.hpp"
-#include "antlr/ScannerException.hpp"
-#include "antlr/ParserException.hpp"
+#include "antlr/RecognitionException.hpp"
 
 #include "GrpLineAndFile.hpp"
 #include "GrpParserTokenTypes.hpp"

@@ -53,7 +53,6 @@ grcompiler_SOURCES = \
         GrpLexer.hpp \
         GrpLineAndFile.hpp \
         GrpParser.cpp \
-        GrpParserDebug.cpp \
         GrpParser.hpp \
         GrpParserTokenTypes.hpp \
         GrpToken.hpp \

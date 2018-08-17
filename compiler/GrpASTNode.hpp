@@ -15,7 +15,7 @@ Description:
 #ifndef GRPASTNODE
 #define GRPASTNODE
 
-class GrpASTNode : public CommonASTNode
+class GrpASTNode : public antlr::ASTFactory
 {
 public:
 	//	Additional instance variable:
@@ -23,17 +23,11 @@ public:
 
 	//	And methods to handle it:
 	GrpASTNode()
-		: CommonASTNode()
 	{
 		// initialize instance variables
 	}
 
-	static ASTNode * factory()
-	{
-		return new GrpASTNode;
-	}
-
-	void initialize(RefToken t);
+	void initialize(antlr::RefToken t);
 
 //	int getLine() { return m_lnf.Line(); }
 //	void setLine(int n) { m_lnf.SetLine(n); }

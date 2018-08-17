@@ -26,7 +26,7 @@ public:
 	GrpTokenStreamFilter * m_ptsf;
 	void init(GrpTokenStreamFilter & tsf);
 
-	void reportError(const ParserException& ex);
+	void reportError(const antlr::RecognitionException& ex);
 
 	void reportError(const std::string& s)
 	{

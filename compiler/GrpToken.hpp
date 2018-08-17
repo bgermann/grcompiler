@@ -15,7 +15,7 @@ Description:
 #ifndef GRP_TOKEN
 #define GRP_TOKEN
 
-class GrpToken : public CommonToken
+class GrpToken : public antlr::CommonToken
 {
 public:
 	//	Additional instance variables:
@@ -27,9 +27,9 @@ public:
 	{
 	}
 
-	static RefToken factory()
+	static antlr::RefToken factory()
 	{
-		return RefToken(new GrpToken);
+		return antlr::RefToken(new GrpToken);
 	}
 
 	virtual int getLine()

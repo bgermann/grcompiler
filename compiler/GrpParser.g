@@ -61,10 +61,10 @@ options
 void GrpParser::init(GrpTokenStreamFilter & tsf)
 {
 	m_ptsf = &tsf;
-	setASTNodeFactory(&GrpASTNode::factory);
+	setASTNodeFactory(new GrpASTNode());
 }
 
-void GrpParser::reportError(const ParserException& ex)
+void GrpParser::reportError(const antlr::RecognitionException& ex)
 {
 	//	Pipe the error back through the token stream filter, so it can supply the
 	//	line-and-file information.
@@ -89,7 +89,7 @@ public:
 	GrpTokenStreamFilter * m_ptsf;
 	void init(GrpTokenStreamFilter & tsf);
 
-	void reportError(const ParserException& ex);
+	void reportError(const antlr::RecognitionException& ex);
 
 	void reportError(const std::string& s)
 	{
@@ -842,7 +842,7 @@ void GrpLexer::init(GrpTokenStreamFilter & tsf)
 	setTokenObjectFactory(&GrpToken::factory);
 }
 
-void GrpLexer::reportError(const ScannerException& ex)
+void GrpLexer::reportError(const antlr::ANTLRException& ex)
 {
 	//	Pipe the error through the token stream filter, to handle the
 	//	line-and-file adjustments.
@@ -927,7 +927,7 @@ public:
 	GrpTokenStreamFilter * m_ptsf;
 	void init(GrpTokenStreamFilter & tsf);
 
-	void reportError(const ScannerException& ex);
+	void reportError(const antlr::ANTLRException& ex);
 
 	void reportError(const std::string& s)
 	{
@@ -937,7 +937,7 @@ public:
 	{
 		AddGlobalError(false, 505, s.c_str(), 0);
 	}
-	RefToken publicMakeToken(int t)
+	antlr::RefToken publicMakeToken(int t)
 	{
 		return makeToken(t);
 	}
@@ -962,7 +962,7 @@ WS					:	(	' '
 							|	'\n'
 							) { newline(); }
 //						|	','
-						) { _ttype = Token::SKIP; }
+						) { _ttype = antlr::Token::SKIP; }
 ;
 
 //
@@ -970,7 +970,7 @@ WS					:	(	' '
 //
 
 COMMENT_SL		:	"//"	(~('\n'|'\r'))*
-						{ _ttype = Token::SKIP; }
+						{ _ttype = antlr::Token::SKIP; }
 ;
 
 COMMENT_ML		:	"/*"
@@ -979,7 +979,7 @@ COMMENT_ML		:	"/*"
 						|	~('*'|'\n')
 						)*
 						"*/"
-						{ _ttype = Token::SKIP; }
+						{ _ttype = antlr::Token::SKIP; }
 ;
 
 //
